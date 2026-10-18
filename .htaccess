@@ -4,5 +4,5 @@ RedirectMatch 301 ^/home$ /
 RedirectMatch 301 ^/(?i)saxofoonles-(beginners|gevorderden)$ /saxofoonles/
 RedirectMatch 301 ^/prijzen$ /saxofoonles/
 RedirectMatch 301 ^/jazzworkshops$ /jazzworkshops/
-RedirectMatch 301 ^/(biografie|muziek|portfolio-details\.html)$ /over/
+RedirectMatch 301 ^/(over|biografie|muziek|portfolio-details\.html)/?$ /docent/
 RedirectMatch 301 ^/contact$ /contact/

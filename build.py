@@ -1,7 +1,7 @@
 import json, os, sys
 
 OUT = sys.argv[1]
-SITE = "https://www.eldertvanoosten.nl"
+SITE = "https://www.2ndfloorjazzschool.nl"  # change here if the domain is served without www
 PHONE_DISPLAY = "06 434 88 440"
 PHONE_TEL = "+31643488440"
 WA = "https://wa.me/31643488440"
@@ -9,6 +9,9 @@ EMAIL = "eldertvanoosten@gmail.com"
 STREET = "Stuyvesantstraat 10-1"
 POSTCODE = "1058 AL"
 CITY = "Amsterdam"
+SCHOOL = "2nd Floor Jazz School"
+ASSET_V = "5"  # bump after changing style.css or main.js so browsers fetch the new file
+MARK = '<svg class="mark" width="36" height="36" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="6" fill="#17161b"/><rect x="7" y="8" width="18" height="3.2" rx="1.6" fill="#e2b765"/><rect x="7" y="14.4" width="18" height="3.2" rx="1.6" fill="#f5f0e6" fill-opacity=".5"/><rect x="7" y="20.8" width="18" height="3.2" rx="1.6" fill="#f5f0e6" fill-opacity=".5"/></svg>'
 
 ICON = {
     "phone": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>',
@@ -17,16 +20,16 @@ ICON = {
     "play": '<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M7 4v16l13-8z"/></svg>',
 }
 
-NAV_NL = [("/", "Home"), ("/saxofoonles/", "Saxofoonles"), ("/jazzworkshops/", "Jazzworkshops"), ("/over/", "Over Eldert"), ("/contact/", "Contact")]
-NAV_EN = [("/en/", "Home"), ("/en/#lessons", "Lessons"), ("/en/#workshops", "Workshops"), ("/en/#about", "About"), ("/en/#contact", "Contact")]
+NAV_NL = [("/", "Home"), ("/jazzworkshops/", "Jazzworkshops"), ("/saxofoonles/", "Saxofoonles"), ("/docent/", "Docent"), ("/contact/", "Contact")]
+NAV_EN = [("/en/", "Home"), ("/en/#workshops", "Workshops"), ("/en/#lessons", "Lessons"), ("/en/#teacher", "Teacher"), ("/en/#contact", "Contact")]
 
 BUSINESS = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "@id": SITE + "/#business",
-    "name": "Eldert van Oosten — Saxofoonles & Jazzworkshops",
-    "alternateName": "2nd Floor Jazz School",
-    "description": "Saxofoonles voor beginners en gevorderden en jazzworkshops (improvisatie en samenspel) in een eigen studio in Amsterdam-West.",
+    "name": "2nd Floor Jazz School",
+    "alternateName": "2nd Floor Jazzschool",
+    "description": "Jazzworkshops voor volwassenen (samenspel en improvisatie) en saxofoonles in Amsterdam-West, onder leiding van jazzsaxofonist Eldert van Oosten. Studio met contrabas, drumstel, piano en versterkers.",
     "url": SITE + "/",
     "image": SITE + "/assets/img/og-image.jpg",
     "logo": SITE + "/assets/img/icon-512.png",
@@ -36,6 +39,8 @@ BUSINESS = {
     "address": {"@type": "PostalAddress", "streetAddress": STREET, "postalCode": POSTCODE.replace(" ", ""), "addressLocality": CITY, "addressRegion": "Noord-Holland", "addressCountry": "NL"},
     "areaServed": {"@type": "City", "name": "Amsterdam"},
     "founder": {"@id": SITE + "/#eldert"},
+    "employee": {"@id": SITE + "/#eldert"},
+    "amenityFeature": [{"@type": "LocationFeatureSpecification", "name": n, "value": True} for n in ["Contrabas", "Drumstel", "Piano", "Versterkers"]],
     "knowsLanguage": ["nl", "en"],
 }
 PERSON = {
@@ -43,8 +48,8 @@ PERSON = {
     "@type": "Person",
     "@id": SITE + "/#eldert",
     "name": "Eldert van Oosten",
-    "jobTitle": ["Saxofonist", "Saxofoondocent", "Workshopleider jazz"],
-    "url": SITE + "/",
+    "jobTitle": ["Jazzsaxofonist", "Docent en coach, 2nd Floor Jazz School"],
+    "url": SITE + "/docent/",
     "image": SITE + "/assets/img/eldert-portret.webp",
     "alumniOf": {"@type": "CollegeOrUniversity", "name": "Sweelinck Conservatorium Amsterdam"},
     "knowsAbout": ["Saxofoon", "Jazz", "Improvisatie", "Jazzstandards", "Samenspel"],
@@ -92,7 +97,7 @@ def page(path, title, desc, body, current, lang="nl", ld=(), alt=None):
 {hreflang}<meta name="theme-color" content="#17161b">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="{T('nl_NL', 'en_GB')}">
-<meta property="og:site_name" content="Eldert van Oosten">
+<meta property="og:site_name" content="2nd Floor Jazz School">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
 <meta property="og:url" content="{SITE}{path}">
@@ -100,18 +105,19 @@ def page(path, title, desc, body, current, lang="nl", ld=(), alt=None):
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <link rel="preload" href="/assets/fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/hanken-grotesk.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/style.css?v={ASSET_V}">
 {lds}</head>
 <body>
 <a class="skip" href="#main">{T('Naar de inhoud', 'Skip to content')}</a>
 <header class="site-header">
   <div class="wrap">
-    <a class="brand" href="{T('/', '/en/')}"><strong>Eldert van Oosten</strong><span>{T('Saxofonist &amp; docent', 'Saxophonist &amp; teacher')}</span></a>
+    <a class="brand" href="{T('/', '/en/')}">{MARK}<span class="brand-text"><strong>2nd Floor Jazz School</strong><span>{T('Jazzworkshops Amsterdam', 'Jazz workshops Amsterdam')}</span></span></a>
     <button class="nav-toggle" aria-expanded="false" aria-controls="nav"><span></span>Menu</button>
     <nav class="nav" id="nav" aria-label="{T('Hoofdmenu', 'Main menu')}"><ul>{items}</ul></nav>
   </div>
@@ -122,8 +128,8 @@ def page(path, title, desc, body, current, lang="nl", ld=(), alt=None):
 <footer class="site-footer">
   <div class="wrap">
     <div>
-      <strong>Eldert van Oosten</strong>
-      <p>{T('Saxofoonles en jazzworkshops in Amsterdam-West. Jazzsaxofonist en docent sinds 1988.', 'Saxophone lessons and jazz workshops in Amsterdam-West. Jazz saxophonist and teacher since 1988.')}</p>
+      <strong>2nd Floor Jazz School</strong>
+      <p>{T('Jazzworkshops en saxofoonles voor volwassenen in Amsterdam-West, onder leiding van jazzsaxofonist Eldert van Oosten.', 'Jazz workshops and saxophone lessons for adults in Amsterdam-West, led by jazz saxophonist Eldert van Oosten.')}</p>
     </div>
     <div>
       <h2>{T('Pagina’s', 'Pages')}</h2>
@@ -135,7 +141,7 @@ def page(path, title, desc, body, current, lang="nl", ld=(), alt=None):
       <a href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a><br>
       <a href="mailto:{EMAIL}">{EMAIL}</a></address>
     </div>
-    <p class="legal">© <span data-year>2026</span> Eldert van Oosten · {T('Saxofoonles Amsterdam · Jazzworkshops Amsterdam', 'Saxophone lessons Amsterdam · Jazz workshops Amsterdam')}</p>
+    <p class="legal">© <span data-year>2026</span> 2nd Floor Jazz School · {T('Jazzworkshops Amsterdam · Saxofoonles Amsterdam', 'Jazz workshops Amsterdam · Saxophone lessons Amsterdam')}</p>
   </div>
 </footer>
 <nav class="actionbar" aria-label="{T('Snel contact', 'Quick contact')}">
@@ -143,7 +149,7 @@ def page(path, title, desc, body, current, lang="nl", ld=(), alt=None):
   <a href="{WA}">{ICON['wa']}WhatsApp</a>
   <a href="mailto:{EMAIL}">{ICON['mail']}E-mail</a>
 </nav>
-<script src="/assets/js/main.js" defer></script>
+<script src="/assets/js/main.js?v={ASSET_V}" defer></script>
 </body>
 </html>
 """
@@ -192,18 +198,17 @@ home = f"""
 <section class="hero">
   <div class="wrap">
     <div>
-      <span class="track" data-n="A1">Amsterdam-West · sinds 1988</span>
-      <h1 >Saxofoonles &amp; <em>jazzworkshops</em> in Amsterdam<span class="small">bij jazzsaxofonist Eldert van Oosten</span></h1>
-      <p class="lead">Leer saxofoon spelen, ontwikkel je eigen geluid of ontdek hoe het is om te improviseren in een band. Persoonlijke lessen voor beginners en gevorderden, en wekelijkse jazzworkshops in een mooie studio in Amsterdam-West.</p>
+      <span class="track" data-n="A1">Amsterdam-West · voor volwassenen</span>
+      <h1><em>Jazzworkshops</em> in Amsterdam<span class="small">met jazzsaxofonist Eldert van Oosten</span></h1>
+      <div class="gear">
+        <span class="gear-label">In de studio staan klaar</span>
+        <ul><li>Contrabas</li><li>Drumstel</li><li>Piano</li><li>Versterkers</li></ul>
+      </div>
+      <p class="lead">Je hoeft alleen je eigen instrument mee te nemen. Speel in een vaste groep, leer improviseren over akkoordenschema’s en sta aan het eind van het seizoen op het podium. Daarnaast kun je bij ons terecht voor saxofoonles.</p>
       <div>{contact_buttons()}</div>
-      <ul class="facts">
-        <li><b>35+</b><span>jaar lesgeven</span></li>
-        <li><b>22</b><span>jaar Muziekschool Leiden</span></li>
-        <li><b>Sweelinck</b><span>Conservatorium Amsterdam</span></li>
-      </ul>
     </div>
     <figure class="hero-figure">
-      {img("workshop-2", "Eldert van Oosten speelt tenorsaxofoon samen met een leerling tijdens een jazzworkshop", 900, 1200, eager=True, sizes="(max-width: 52rem) 100vw, 40vw")}
+      {img("workshop-2", "Docent Eldert van Oosten speelt tenorsaxofoon samen met een deelnemer tijdens een jazzworkshop", 900, 1200, eager=True, sizes="(max-width: 52rem) 100vw, 40vw")}
       <figcaption><b>Live</b> — samen spelen op de einduitvoering van de workshop</figcaption>
     </figure>
   </div>
@@ -212,27 +217,27 @@ home = f"""
 <section class="section-alt">
   <div class="wrap">
     <div class="section-head">
-      <span class="track" data-n="A2">Wat ik aanbied</span>
+      <span class="track" data-n="A2">Wat we aanbieden</span>
       <h2>Twee kanten van <em>dezelfde plaat</em></h2>
-      <p class="lead">Individuele saxofoonles voor je toon, techniek en repertoire — en groepsworkshops waarin je leert wat je alleen niet kunt leren: samenspelen.</p>
+      <p class="lead">Jazzworkshops waarin je leert wat je alleen niet kunt leren: samenspelen — en individuele saxofoonles voor je toon, techniek en repertoire.</p>
     </div>
     <div class="cards">
-      <a class="card" href="/saxofoonles/">
-        <span class="side">Kant A</span>
-        {img("workshop-1", "Leerling speelt altsaxofoon in de tuin", 900, 1200, sizes="(max-width: 44rem) 100vw, 50vw").replace('alt=', 'style="object-position:50% 20%" alt=')}
-        <div class="card-body">
-          <h3>Saxofoonles</h3>
-          <p>Privéles voor kinderen en volwassenen, van de allereerste toon tot jazzimprovisatie. Alt-, tenor- en sopraansaxofoon.</p>
-          <span class="more">Over de lessen</span>
-        </div>
-      </a>
       <a class="card" href="/jazzworkshops/">
-        <span class="side">Kant B</span>
+        <span class="side">Kant A</span>
         {img("workshop-9", "Groepsfoto van de deelnemers aan de jazzworkshop met hun instrumenten", 1200, 900, sizes="(max-width: 44rem) 100vw, 50vw")}
         <div class="card-body">
           <h3>Jazzworkshops</h3>
-          <p>Samenspel, ritmiek en improviseren over akkoordenschema’s in een vaste groep. Piano, contrabas, drums en versterkers staan klaar.</p>
+          <p>Samenspel, ritmiek en improviseren over akkoordenschema’s in een vaste groep. Voor volwassen muzikanten met enige jazzervaring, alle instrumenten.</p>
           <span class="more">Over de workshops</span>
+        </div>
+      </a>
+      <a class="card" href="/saxofoonles/">
+        <span class="side">Kant B</span>
+        {img("workshop-1", "Saxofoniste speelt altsaxofoon in de tuin", 900, 1200, sizes="(max-width: 44rem) 100vw, 50vw").replace('alt=', 'style="object-position:50% 20%" alt=')}
+        <div class="card-body">
+          <h3>Saxofoonles</h3>
+          <p>Privéles voor volwassenen bij Eldert, van de allereerste toon tot jazzimprovisatie. Ook een goede opstap naar de workshop.</p>
+          <span class="more">Over de lessen</span>
         </div>
       </a>
     </div>
@@ -242,15 +247,20 @@ home = f"""
 <section>
   <div class="wrap split">
     <div>
-      <span class="track" data-n="A3">Over Eldert</span>
-      <h2>Jazzsaxofonist, docent en <em>bandcoach</em></h2>
-      <p>Na mijn studie aan het Sweelinck Conservatorium (afdeling improviserend musicus) ben ik in 1988 begonnen als freelance saxofonist en docent. Ik gaf 22 jaar les en workshops aan de Muziekschool Leiden en heb sinds 2010 mijn eigen praktijk en studio in Amsterdam-West.</p>
-      <p>Als saxofonist speelde ik in binnen- en buitenland, onder meer met Eye of the Hurricane, De Dijk, het Ricciotti Ensemble, de Sidewinders en het Belleville Trio. Die ervaring op het podium neem ik mee in elke les.</p>
-      <p><a href="/over/">Lees meer en luister naar mijn muziek →</a></p>
+      <span class="track" data-n="A3">De docent</span>
+      <h2>Eldert van Oosten, docent en <em>coach</em></h2>
+      <p>De workshops worden geleid door jazzsaxofonist Eldert van Oosten. Hij studeerde aan het Sweelinck Conservatorium (afdeling improviserend musicus), gaf 22 jaar les en workshops aan de Muziekschool Leiden en begon in 2010 de 2nd Floor Jazz School in Amsterdam-West.</p>
+      <p>Als saxofonist speelde hij in binnen- en buitenland, onder meer met Eye of the Hurricane, De Dijk, het Ricciotti Ensemble, de Sidewinders en het Belleville Trio. Die podiumervaring zit in elke workshop.</p>
+      <ul class="facts">
+        <li><b>35+</b><span>jaar workshops &amp; les</span></li>
+        <li><b>22</b><span>jaar Muziekschool Leiden</span></li>
+        <li><b>Sweelinck</b><span>Conservatorium</span></li>
+      </ul>
+      <p style="margin-top:1.5rem"><a href="/docent/">Meer over Eldert en zijn muziek →</a></p>
     </div>
     <div>
-      <blockquote class="pull">In mijn lessen staat het plezier van het muziek maken voorop.</blockquote>
-      <p class="note" style="margin-top:2rem">Mijn hart ligt bij de jazz — maar ook soul, funk, pop en wereldmuziek komen in de lessen aan bod.</p>
+      <blockquote class="pull">Het plezier van samen muziek maken staat voorop.</blockquote>
+      <p class="note" style="margin-top:2rem">Jazz staat centraal — maar ook blues, latin, soul en wereldmuziek komen aan bod.</p>
     </div>
   </div>
 </section>
@@ -270,20 +280,21 @@ home = f"""
   </div>
 </section>
 
-{cta('Zin om te <em>beginnen?</em>', 'Bel, app of mail voor een kennismakingsles of om je aan te melden voor de jazzworkshop. Ik denk ook graag mee bij de aanschaf van een saxofoon.')}
+{cta('Zin om mee te <em>spelen?</em>', 'Bel, app of mail om je aan te melden voor de jazzworkshop of voor een kennismakingsles saxofoon. Dan bespreken we meteen welke groep bij je past.')}
 """
-page("/", "Saxofoonles & Jazzworkshops Amsterdam | Eldert van Oosten",
-     "Saxofoonles in Amsterdam voor beginners en gevorderden, en jazzworkshops in Amsterdam-West. Jazzsaxofonist en docent Eldert van Oosten, sinds 1988.",
+page("/", "Jazzworkshops Amsterdam | 2nd Floor Jazz School",
+     "Jazzworkshops voor volwassenen in Amsterdam-West. Studio met contrabas, drums, piano en versterkers. Samenspelen en improviseren o.l.v. Eldert van Oosten.",
      home, "/", ld=[BUSINESS, PERSON], alt={"nl": "/", "en": "/en/"})
 
 # ---------------------------------------------------------------- SAXOFOONLES
 sax_faq = [
     ("Moet ik al noten kunnen lezen?", "Nee. Noten lezen leer je gewoon tijdens de lessen. Veel lesboeken hebben meespeeltracks, zodat je meteen ervaart hoe het is om met een band te spelen."),
-    ("Is saxofoonles ook geschikt voor kinderen?", "Ja, ik geef les aan zowel kinderen als volwassenen. De lessen worden afgestemd op leeftijd, niveau en wat je zelf graag wilt spelen."),
-    ("Ik heb nog geen saxofoon. Wat nu?", "Neem gerust contact op voordat je iets koopt. Ik geef advies over het kiezen, huren of kopen van een geschikte (tweedehands) saxofoon en de juiste rietjes en mondstukken."),
+    ("Ik heb nog nooit gespeeld. Ben ik niet te oud om te beginnen?", "Nee. Veel leerlingen beginnen pas op latere leeftijd. De lessen zijn voor volwassenen en worden afgestemd op je niveau en wat je zelf graag wilt spelen."),
+    ("Kan ik na de lessen meedoen aan de jazzworkshop?", "Ja. Saxofoonles is een goede manier om de basis van jazz en improvisatie te leren, zodat je daarna kunt instromen in een van de workshopgroepen."),
+    ("Ik heb nog geen saxofoon. Wat nu?", "Neem gerust contact op voordat je iets koopt. Eldert geeft advies over het kiezen, huren of kopen van een geschikte (tweedehands) saxofoon en de juiste rietjes en mondstukken."),
     ("Hoe lang duurt een les en wat kost het?", "Lessen duren 40 minuten of een uur, los of als lessenkaart. Neem contact op voor de actuele tarieven en een kennismakingsles."),
-    ("Welke saxofoons kan ik bij je leren spelen?", "Altsaxofoon, tenorsaxofoon en sopraansaxofoon. Veel beginners starten op de alt, maar dat hangt af van je smaak en de muziek die je wilt spelen."),
-    ("Waar vinden de lessen plaats?", f"In mijn studio aan de {STREET} in Amsterdam-West, goed bereikbaar met openbaar vervoer en de fiets."),
+    ("Welke saxofoons kan ik leren spelen?", "Altsaxofoon, tenorsaxofoon en sopraansaxofoon. Veel beginners starten op de alt, maar dat hangt af van je smaak en de muziek die je wilt spelen."),
+    ("Waar vinden de lessen plaats?", f"In de studio van de 2nd Floor Jazz School aan de {STREET} in Amsterdam-West, goed bereikbaar met openbaar vervoer en de fiets."),
 ]
 sax = f"""
 <header class="page-head">
@@ -291,7 +302,7 @@ sax = f"""
     <nav class="crumbs" aria-label="Kruimelpad"><a href="/">Home</a> / Saxofoonles</nav>
     <span class="track" data-n="A1">Privéles in Amsterdam-West</span>
     <h1>Saxofoonles in Amsterdam voor <em>beginners</em> en <em>gevorderden</em></h1>
-    <p class="lead">Persoonlijke saxofoonles voor kinderen en volwassenen. Of je nu nog nooit een saxofoon hebt vastgehouden of al jaren in een big band speelt: we werken aan wat jij nodig hebt — met plezier in het spelen voorop.</p>
+    <p class="lead">Persoonlijke saxofoonles voor volwassenen bij jazzsaxofonist Eldert van Oosten. Of je nu nog nooit een saxofoon hebt vastgehouden of al jaren in een big band speelt: we werken aan wat jij nodig hebt — met plezier in het spelen voorop.</p>
     {contact_buttons()}
   </div>
 </header>
@@ -327,7 +338,7 @@ sax = f"""
       <div class="feature" style="border-color:rgba(245,240,230,.15)"><span class="num">ii.</span><h3>Klankgeoriënteerd spelen</h3><p>Leer fysieke spanningen herkennen en loslaten, zodat je vrijer en makkelijker speelt. Geïnspireerd op de Lichtenberger-methode.</p></div>
       <div class="feature" style="border-color:rgba(245,240,230,.15)"><span class="num">iii.</span><h3>Repertoire</h3><p>Jazzstandards, blues, funk of eigen stukken uit je hoofd leren — zodat je zonder papier op een jamsessie kunt meespelen.</p></div>
       <div class="feature" style="border-color:rgba(245,240,230,.15)"><span class="num">iv.</span><h3>Theorie &amp; improvisatie</h3><p>Toonladders, akkoorden, akkoordenschema’s en vorm: zo hoor je meer structuur in muziek en improviseer je met meer vrijheid.</p></div>
-      <div class="feature" style="border-color:rgba(245,240,230,.15)"><span class="num">v.</span><h3>Bandcoaching</h3><p>Al jaren zet ik leerlingenbands op en begeleid ik ze. Ook saxofoonsecties van big bands kunnen bij mij terecht voor advies.</p></div>
+      <div class="feature" style="border-color:rgba(245,240,230,.15)"><span class="num">v.</span><h3>Bandcoaching</h3><p>Eldert zet al jaren bands op en begeleidt ze. Ook saxofoonsecties van big bands kunnen bij hem terecht voor advies.</p></div>
     </div>
   </div>
 </section>
@@ -339,9 +350,10 @@ sax = f"""
       <h2>Hoe de lessen <em>werken</em></h2>
       <ul class="ticks">
         <li>Lessen van 40 minuten of een uur, los of met een lessenkaart</li>
-        <li>Voor kinderen en volwassenen, alle niveaus</li>
+        <li>Voor volwassenen, van beginner tot gevorderd</li>
+        <li>Daarna doorstromen naar de <a href="/jazzworkshops/">jazzworkshop</a></li>
         <li>Alt-, tenor- en sopraansaxofoon</li>
-        <li>In mijn studio in Amsterdam-West</li>
+        <li>In de studio in Amsterdam-West</li>
         <li>Advies bij het kopen of huren van een saxofoon</li>
       </ul>
       <p class="note">Tarieven en beschikbaarheid? Neem contact op — dan plannen we meteen een kennismakingsles.</p>
@@ -353,21 +365,22 @@ sax = f"""
   </div>
 </section>
 
-{cta('Plan een <em>kennismakingsles</em>', 'Vertel me wat je wilt leren, dan kijken we samen wat bij je past.')}
+{cta('Plan een <em>kennismakingsles</em>', 'Vertel wat je wilt leren, dan kijken we samen wat bij je past.')}
 """
-page("/saxofoonles/", "Saxofoonles Amsterdam | Eldert van Oosten",
-     "Saxofoonles in Amsterdam-West voor kinderen en volwassenen. Leer saxofoon spelen of werk aan toon, improvisatie en repertoire bij jazzsaxofonist Eldert van Oosten.",
+page("/saxofoonles/", "Saxofoonles Amsterdam | 2nd Floor Jazz School",
+     "Saxofoonles voor volwassenen in Amsterdam-West. Leer saxofoon spelen of werk aan toon, improvisatie en repertoire bij jazzsaxofonist Eldert van Oosten.",
      sax, "/saxofoonles/", ld=[BUSINESS, faq_ld(sax_faq), crumbs_ld([("/", "Home"), ("/saxofoonles/", "Saxofoonles")]),
-     {"@context": "https://schema.org", "@type": "Service", "serviceType": "Saxofoonles", "name": "Saxofoonles Amsterdam", "provider": {"@id": SITE + "/#business"}, "areaServed": "Amsterdam", "audience": {"@type": "Audience", "audienceType": "Beginners en gevorderden, kinderen en volwassenen"}}],
+     {"@context": "https://schema.org", "@type": "Service", "serviceType": "Saxofoonles", "name": "Saxofoonles Amsterdam", "provider": {"@id": SITE + "/#business"}, "areaServed": "Amsterdam", "audience": {"@type": "Audience", "audienceType": "Volwassenen, beginners en gevorderden"}}],
      alt={"nl": "/saxofoonles/", "en": "/en/"})
 
 # ---------------------------------------------------------------- JAZZWORKSHOPS
 ws_faq = [
-    ("Voor wie is de jazzworkshop?", "Voor muzikanten die al een tijdje spelen en zich willen ontwikkelen in improvisatie en samenspel. Je hoeft geen jazzervaring te hebben: er zijn groepen voor spelers die net beginnen met improviseren en voor meer ervaren muzikanten."),
+    ("Voor wie is de jazzworkshop?", "Voor volwassen muzikanten die hun instrument redelijk beheersen en al enige ervaring met jazz hebben. Je hoeft geen ervaren improvisator te zijn — dat ontwikkel je juist in de groep — maar een basis in jazz is nodig om goed mee te kunnen doen. Twijfel je? Neem contact op, dan bespreken we je niveau."),
+    ("Ik heb nog geen jazzervaring. Wat nu?", "Speel je saxofoon, dan kun je eerst <a href=\"/saxofoonles/\">saxofoonles</a> nemen bij Eldert om de basis van jazz en improvisatie te leren. Daarna kun je instromen in een workshopgroep."),
     ("Welke instrumenten kunnen meedoen?", "Blazers (saxofoon, trompet, trombone, klarinet, fluit), piano en toetsen, gitaar, contrabas en basgitaar, drums en zang. Piano, contrabas, drumstel en versterkers zijn in de studio aanwezig."),
     ("Wat speel je in de workshop?", "Jazzstandards, blues, latin, eigen stukken en muziek uit het wereldrepertoire. We werken aan een eigen repertoire als groep."),
     ("Treden we ook op?", "Ja, optreden is een belangrijk onderdeel van de cursus. De groepen sluiten af met een uitvoering, onder meer op Buurtboerderij Ons Genoegen."),
-    ("Hoe meld ik me aan?", "Bel, app of mail me. We bespreken je ervaring en ik kijk in welke groep je het beste past. Er is altijd plek voor nieuwe deelnemers."),
+    ("Hoe meld ik me aan?", "Bel, app of mail. We bespreken je ervaring en kijken in welke groep je het beste past. Er is regelmatig plek voor nieuwe deelnemers."),
 ]
 ws = f"""
 <header class="page-head">
@@ -375,7 +388,11 @@ ws = f"""
     <nav class="crumbs" aria-label="Kruimelpad"><a href="/">Home</a> / Jazzworkshops</nav>
     <span class="track" data-n="B1">2nd Floor Jazz School</span>
     <h1>Jazzworkshops in Amsterdam: leer <em>improviseren</em> en samenspelen</h1>
-    <p class="lead">In een mooie studio in Amsterdam-West geef ik jazzworkshops aan muzikanten die zich verder willen ontwikkelen op het gebied van improvisatie. Wil je meer weten over samenspel, ritmiek en improviseren over akkoordenschema’s? Meld je dan aan.</p>
+    <div class="gear">
+      <span class="gear-label">In de studio staan klaar</span>
+      <ul><li>Contrabas</li><li>Drumstel</li><li>Piano</li><li>Versterkers</li></ul>
+    </div>
+    <p class="lead">Neem je eigen instrument mee — de rest staat er. Bij de 2nd Floor Jazz School werken volwassen muzikanten met enige jazzervaring aan samenspel, ritmiek en improviseren over akkoordenschema’s, onder leiding van jazzsaxofonist Eldert van Oosten.</p>
     {contact_buttons()}
   </div>
 </header>
@@ -385,7 +402,7 @@ ws = f"""
     <div>
       <span class="track" data-n="B2">De workshop</span>
       <h2>Samen spelen, samen <em>leren</em></h2>
-      <p>Na 22 jaar lesgeven aan de Muziekschool Leiden begon ik in 2010 mijn eigen praktijk. De jazzworkshops zijn het hart ervan: vaste groepen van een handvol muzikanten die samen werken aan een repertoire van jazzstandards, eigen stukken en muziek uit het wereldrepertoire.</p>
+      <p>De 2nd Floor Jazz School begon in 2010, toen Eldert van Oosten na 22 jaar lesgeven aan de Muziekschool Leiden een eigen studio opende in Amsterdam-West. De jazzworkshops zijn het hart van de school: vaste groepen van een handvol muzikanten die samen werken aan een repertoire van jazzstandards, eigen stukken en muziek uit het wereldrepertoire.</p>
       <ul class="ticks">
         <li><b>Samenspel</b> — luisteren, reageren, begeleiden en de ruimte geven</li>
         <li><b>Ritmiek</b> — timing, swing, latin en groove</li>
@@ -431,25 +448,25 @@ ws = f"""
   </div>
 </section>
 
-{cta('Speel mee in een <em>jazzgroep</em>', 'Er is altijd ruimte voor nieuwe deelnemers. Laat weten wat je speelt en hoe lang al — dan zoek ik de groep die bij je past.')}
+{cta('Speel mee in een <em>jazzgroep</em>', 'Er is regelmatig ruimte voor nieuwe deelnemers. Laat weten wat je speelt en hoe lang al — dan zoeken we de groep die bij je past.')}
 """
 page("/jazzworkshops/", "Jazzworkshop Amsterdam | Improvisatie & samenspel",
-     "Jazzworkshops in Amsterdam-West: leer improviseren en samenspelen in een vaste groep. Piano, contrabas en drums aanwezig. Voor alle instrumenten.",
+     "Jazzworkshops in Amsterdam-West: leer improviseren en samenspelen in een vaste groep. Voor volwassenen met enige jazzervaring, alle instrumenten.",
      ws, "/jazzworkshops/", ld=[BUSINESS, faq_ld(ws_faq), crumbs_ld([("/", "Home"), ("/jazzworkshops/", "Jazzworkshops")]),
-     {"@context": "https://schema.org", "@type": "Course", "name": "Jazzworkshop: improvisatie en samenspel", "description": "Wekelijkse jazzworkshop in Amsterdam-West voor alle instrumenten: samenspel, ritmiek, improvisatie over akkoordenschema’s en optreden.", "inLanguage": "nl", "provider": {"@type": "Organization", "name": "2nd Floor Jazz School — Eldert van Oosten", "url": SITE + "/"}}],
+     {"@context": "https://schema.org", "@type": "Course", "name": "Jazzworkshop: improvisatie en samenspel", "description": "Wekelijkse jazzworkshop in Amsterdam-West voor volwassen muzikanten met enige jazzervaring, alle instrumenten: samenspel, ritmiek, improvisatie over akkoordenschema’s en optreden.", "inLanguage": "nl", "provider": {"@id": SITE + "/#business"}}],
      alt={"nl": "/jazzworkshops/", "en": "/en/"})
 
-# ---------------------------------------------------------------- OVER
+# ---------------------------------------------------------------- DOCENT
 tracks = [("Chucho", "https://soundcloud.com/eldert-637911487/chucho"),
           ("While My Lady Sleeps", "https://soundcloud.com/eldert-637911487/whilemyladysleeps"),
           ("Strangers in the Night", "https://soundcloud.com/eldert-637911487/strangers-in-the-night")]
 track_html = "".join(f'<li><button type="button" data-sc="{u}" aria-expanded="false"><span class="no">0{i+1}</span><span class="title">{t}</span><span class="play">{ICON["play"]}<span class="skip">Afspelen</span></span></button></li>' for i, (t, u) in enumerate(tracks))
-over = f"""
+docent = f"""
 <header class="page-head">
   <div class="wrap">
-    <nav class="crumbs" aria-label="Kruimelpad"><a href="/">Home</a> / Over Eldert</nav>
-    <span class="track" data-n="C1">Biografie</span>
-    <h1>Eldert van Oosten, <em>jazzsaxofonist</em> uit Amsterdam</h1>
+    <nav class="crumbs" aria-label="Kruimelpad"><a href="/">Home</a> / Docent</nav>
+    <span class="track" data-n="C1">Docent &amp; coach</span>
+    <h1>Eldert van Oosten, <em>jazzsaxofonist</em> en docent</h1>
   </div>
 </header>
 
@@ -460,11 +477,10 @@ over = f"""
       <figcaption>Eldert van Oosten op tenorsaxofoon</figcaption>
     </figure>
     <div>
-      <p class="lead">Geboren en opgegroeid in Amsterdam. Op mijn twaalfde begon ik op de klarinet, op mijn vijftiende kreeg ik mijn eerste altsaxofoon.</p>
-      <p>Toen ik zestien was en saxofonisten als Ben Webster en Sonny Rollins hoorde, wist ik het zeker: ik wilde saxofonist worden. Ik kocht een tenorsaxofoon en ging in 1981 naar het Sweelinck Conservatorium in Amsterdam, waar ik saxofoon studeerde aan de afdeling improviserend musicus. Daar leerde ik veel muzikanten kennen met wie ik nu nog steeds speel.</p>
-      <p>Na mijn afstuderen in 1988 werkte ik als freelance saxofonist in heel verschillende stijlen — en die afwisseling is me altijd goed bevallen. Big bands, blues met P.B. and the Nighttrain, pop met De Dijk, klassiek met het Ricciotti Ensemble, jazz met het Amstel Octet en funk met Fresh Cream.</p>
-      <p>Naast het spelen gaf ik 22 jaar les en workshops aan de Muziekschool Leiden. Sinds 2010 heb ik mijn eigen praktijk en studio in Amsterdam-West, waar ik <a href="/saxofoonles/">saxofoonles</a> geef en de <a href="/jazzworkshops/">jazzworkshops</a> van de 2nd Floor Jazz School leid.</p>
-      <p>En als ik niet speel of lesgeef? Dan ben ik graag op het water of op reis.</p>
+      <p class="lead">Eldert van Oosten leidt de workshops van de 2nd Floor Jazz School en geeft er saxofoonles. Hij is geboren en opgegroeid in Amsterdam, begon op zijn twaalfde op de klarinet en kreeg op zijn vijftiende zijn eerste altsaxofoon.</p>
+      <p>Toen hij zestien was en saxofonisten als Ben Webster en Sonny Rollins hoorde, wist hij het zeker: hij wilde saxofonist worden. Hij kocht een tenorsaxofoon en ging in 1981 naar het Sweelinck Conservatorium in Amsterdam, waar hij saxofoon studeerde aan de afdeling improviserend musicus.</p>
+      <p>Na zijn afstuderen in 1988 werkte hij als freelance saxofonist in heel verschillende stijlen: big bands, blues met P.B. and the Nighttrain, pop met De Dijk, klassiek met het Ricciotti Ensemble, jazz met het Amstel Octet en funk met Fresh Cream.</p>
+      <p>Naast het spelen gaf hij 22 jaar les en workshops aan de Muziekschool Leiden. In 2010 begon hij in Amsterdam-West de studio die de 2nd Floor Jazz School werd, waar hij de <a href="/jazzworkshops/">jazzworkshops</a> leidt en <a href="/saxofoonles/">saxofoonles</a> geeft. Ook coacht hij bands en saxofoonsecties van big bands.</p>
     </div>
   </div>
 </section>
@@ -495,18 +511,18 @@ over = f"""
     <div>
       <span class="track" data-n="C3">Muziek</span>
       <h2>Luister <em>mee</em></h2>
-      <p>Mijn hart ligt bij de jazz, maar in soul en wereldmuziek kan ik mijn muzikale ei ook goed kwijt. Een paar opnames:</p>
+      <p>Elderts hart ligt bij de jazz, maar ook in soul en wereldmuziek voelt hij zich thuis. Een paar opnames:</p>
       <p style="font-size:.85rem">De speler wordt pas geladen als je op een nummer klikt.</p>
     </div>
     <ol class="tracks">{track_html}</ol>
   </div>
 </section>
 
-{cta('Boekingen &amp; <em>lessen</em>', 'Voor optredens, saxofoonles of de jazzworkshop: neem contact op.')}
+{cta('Workshops, lessen &amp; <em>boekingen</em>', 'Voor de jazzworkshop, saxofoonles of het boeken van Eldert als saxofonist: neem contact op.')}
 """
-page("/over/", "Eldert van Oosten | Jazzsaxofonist Amsterdam",
-     "Jazzsaxofonist Eldert van Oosten (Sweelinck Conservatorium) speelde met o.a. De Dijk, Eye of the Hurricane en het Ricciotti Ensemble. Biografie en muziek.",
-     over, "/over/", ld=[PERSON, crumbs_ld([("/", "Home"), ("/over/", "Over Eldert")])], alt={"nl": "/over/", "en": "/en/"})
+page("/docent/", "Docent Eldert van Oosten | 2nd Floor Jazz School",
+     "Jazzsaxofonist Eldert van Oosten leidt de jazzworkshops van de 2nd Floor Jazz School. Speelde met o.a. De Dijk en Eye of the Hurricane.",
+     docent, "/docent/", ld=[PERSON, crumbs_ld([("/", "Home"), ("/docent/", "Docent")])], alt={"nl": "/docent/", "en": "/en/#teacher"})
 
 # ---------------------------------------------------------------- CONTACT
 contact = f"""
@@ -515,15 +531,15 @@ contact = f"""
     <nav class="crumbs" aria-label="Kruimelpad"><a href="/">Home</a> / Contact</nav>
     <span class="track" data-n="D1">Contact</span>
     <h1>Neem <em>contact</em> op</h1>
-    <p class="lead">Voor saxofoonles, de jazzworkshop, advies bij het kopen van een saxofoon of het boeken van een band. Bellen of appen gaat het snelst.</p>
+    <p class="lead">Voor aanmelden bij de jazzworkshop, saxofoonles of het boeken van een band. Bellen of appen gaat het snelst — je krijgt Eldert zelf aan de lijn.</p>
   </div>
 </header>
 <section>
   <div class="wrap">
     <div class="contact-grid">
-      <a class="contact-tile" href="tel:{PHONE_TEL}"><small>Bellen</small><b>{PHONE_DISPLAY}</b><span>Ook voor een kennismakingsles</span></a>
-      <a class="contact-tile" href="{WA}"><small>WhatsApp</small><b>Stuur een appje</b><span>Ik reageer meestal dezelfde dag</span></a>
-      <a class="contact-tile" href="mailto:{EMAIL}?subject=Saxofoonles%20%2F%20jazzworkshop"><small>E-mail</small><b>{EMAIL}</b><span>Vertel kort wat je speelt en zoekt</span></a>
+      <a class="contact-tile" href="tel:{PHONE_TEL}"><small>Bellen</small><b>{PHONE_DISPLAY}</b><span>Eldert van Oosten</span></a>
+      <a class="contact-tile" href="{WA}"><small>WhatsApp</small><b>Stuur een appje</b><span>Meestal dezelfde dag antwoord</span></a>
+      <a class="contact-tile" href="mailto:{EMAIL}?subject=Jazzworkshop%20%2F%20saxofoonles"><small>E-mail</small><b>{EMAIL}</b><span>Vertel kort wat je speelt en zoekt</span></a>
       <a class="contact-tile" href="https://www.google.com/maps/search/?api=1&amp;query=Stuyvesantstraat+10+Amsterdam" rel="noopener"><small>Studio</small><b>{STREET}</b><span>{POSTCODE} {CITY} (West) · route →</span></a>
     </div>
   </div>
@@ -533,8 +549,8 @@ contact = f"""
     <div>
       <span class="track" data-n="D2">Handig om te vermelden</span>
       <ul class="ticks">
-        <li>Welk instrument je speelt (en welke saxofoon)</li>
-        <li>Hoe lang je al speelt — of dat je wilt beginnen</li>
+        <li>Welk instrument je speelt</li>
+        <li>Hoe lang je al speelt en wat je ervaring met jazz is</li>
         <li>Wat je graag wilt leren of spelen</li>
         <li>Op welke dagen je meestal kunt</li>
       </ul>
@@ -545,8 +561,8 @@ contact = f"""
   </div>
 </section>
 """
-page("/contact/", "Contact | Saxofoonles Amsterdam – Eldert van Oosten",
-     f"Bel {PHONE_DISPLAY}, app of mail voor saxofoonles of de jazzworkshop in Amsterdam-West. Studio aan de {STREET}, {CITY}.",
+page("/contact/", "Contact | 2nd Floor Jazz School Amsterdam",
+     f"Bel {PHONE_DISPLAY}, app of mail om je aan te melden voor de jazzworkshop of saxofoonles. Studio aan de {STREET}, Amsterdam-West.",
      contact, "/contact/", ld=[BUSINESS, crumbs_ld([("/", "Home"), ("/contact/", "Contact")])], alt={"nl": "/contact/", "en": "/en/#contact"})
 
 # ---------------------------------------------------------------- ENGLISH
@@ -554,55 +570,59 @@ en = f"""
 <section class="hero">
   <div class="wrap">
     <div>
-      <span class="track" data-n="A1">Amsterdam-West · since 1988</span>
-      <h1 >Saxophone lessons &amp; <em>jazz workshops</em> in Amsterdam<span class="small">with jazz saxophonist Eldert van Oosten</span></h1>
-      <p class="lead">Private saxophone lessons in English or Dutch for complete beginners and experienced players, and weekly jazz workshops where you learn to improvise and play together in a band.</p>
+      <span class="track" data-n="A1">Amsterdam-West · for adults</span>
+      <h1><em>Jazz workshops</em> in Amsterdam<span class="small">with jazz saxophonist Eldert van Oosten</span></h1>
+      <div class="gear">
+        <span class="gear-label">Ready in the studio</span>
+        <ul><li>Double bass</li><li>Drums</li><li>Piano</li><li>Amps</li></ul>
+      </div>
+      <p class="lead">Just bring your own instrument. Play in a regular group, learn to improvise over chord changes and finish the season on stage. Private saxophone lessons for adults too — in English or Dutch.</p>
       <div>{contact_buttons("en")}</div>
     </div>
     <figure class="hero-figure">
-      {img("workshop-2", "Eldert van Oosten playing tenor saxophone with a student", 900, 1200, eager=True, sizes="(max-width: 52rem) 100vw, 40vw")}
+      {img("workshop-2", "Teacher Eldert van Oosten playing tenor saxophone with a participant", 900, 1200, eager=True, sizes="(max-width: 52rem) 100vw, 40vw")}
       <figcaption><b>Live</b> — playing together at the end-of-season concert</figcaption>
     </figure>
   </div>
 </section>
-<section class="section-alt" id="lessons">
+<section class="section-alt">
   <div class="wrap split">
-    <div>
-      <span class="track" data-n="A2">Saxophone lessons</span>
+    <div id="workshops">
+      <span class="track" data-n="A2">Jazz workshops</span>
+      <h2>Learn to <em>play together</em></h2>
+      <p>The 2nd Floor Jazz School runs small, regular groups working on jazz standards, blues, latin and original tunes: ensemble playing, rhythm and improvising over chord changes. Every season ends with a concert.</p>
+      <p>For adult musicians on any instrument who have some jazz experience. You don’t need to be an experienced improviser — that’s what the group is for — but a basic grounding in jazz is needed to take part. Not sure? Get in touch and we’ll talk about your level.</p>
+    </div>
+    <div id="lessons">
+      <span class="track" data-n="A3">Saxophone lessons</span>
       <h2>From your first note to your <em>own sound</em></h2>
-      <p>Lessons for children and adults on alto, tenor and soprano sax. Beginners learn the basics — holding the horn, breathing, tone, reading music — in about ten lessons. Experienced players work on tone, timing, repertoire, theory and improvisation.</p>
+      <p>Private lessons for adults on alto, tenor and soprano sax with Eldert. Beginners learn the basics — holding the horn, breathing, tone, reading music. Experienced players work on tone, timing, repertoire, theory and improvisation.</p>
       <ul class="ticks">
         <li>40- or 60-minute private lessons</li>
         <li>Lessons in English or Dutch</li>
+        <li>A route into the jazz workshops</li>
         <li>Advice on buying or renting a saxophone</li>
-        <li>Coaching for bands and big band sax sections</li>
       </ul>
-    </div>
-    <div  id="workshops">
-      <span class="track" data-n="A3">Jazz workshops</span>
-      <h2>Learn to <em>play together</em></h2>
-      <p>The 2nd Floor Jazz School runs small, regular groups working on jazz standards, original tunes and world music: ensemble playing, rhythm and improvising over chord changes. Piano, double bass, drums and amps are in the studio. Every season ends with a concert.</p>
-      <p>Open to all instruments and levels — including players new to jazz.</p>
     </div>
   </div>
 </section>
-<section id="about">
+<section id="teacher">
   <div class="wrap split">
     <figure class="portrait"><img src="/assets/img/eldert-portret.webp" width="240" height="240" alt="Portrait of Eldert van Oosten with tenor saxophone" style="width:100%" loading="lazy"></figure>
     <div>
-      <span class="track" data-n="A4">About</span>
+      <span class="track" data-n="A4">Your teacher</span>
       <h2>Eldert van <em>Oosten</em></h2>
-      <p>Amsterdam-born saxophonist, trained at the Sweelinck Conservatory (improvising musician programme, graduated 1988). Taught at the Leiden music school for 22 years before opening his own studio in Amsterdam-West in 2010. Has played with Eye of the Hurricane, De Dijk, the Ricciotti Ensemble, the Sidewinders and the Belleville Trio, among many others.</p>
-      <p><a href="/over/" hreflang="nl">Full biography and music (Dutch) →</a></p>
+      <p>Amsterdam-born jazz saxophonist, trained at the Sweelinck Conservatory (improvising musician programme, graduated 1988). He taught at the Leiden music school for 22 years before starting the 2nd Floor Jazz School in Amsterdam-West in 2010. He has played with Eye of the Hurricane, De Dijk, the Ricciotti Ensemble, the Sidewinders and the Belleville Trio, among many others.</p>
+      <p><a href="/docent/" hreflang="nl">Full biography and music (Dutch) →</a></p>
     </div>
   </div>
 </section>
 <div id="contact">
-{cta('Book a <em>first lesson</em>', f'Call, WhatsApp or email. Studio: {STREET}, {POSTCODE} {CITY}.', "en")}
+{cta('Join a <em>workshop</em>', f'Call, WhatsApp or email Eldert. Studio: {STREET}, {POSTCODE} {CITY}.', "en")}
 </div>
 """
-page("/en/", "Saxophone Lessons Amsterdam | Eldert van Oosten",
-     "Saxophone lessons in English in Amsterdam for beginners and advanced players, plus jazz improvisation workshops with saxophonist Eldert van Oosten.",
+page("/en/", "Jazz Workshops Amsterdam | 2nd Floor Jazz School",
+     "Jazz workshops for adults in Amsterdam-West. Studio with double bass, drums, piano and amps. Ensemble playing and improvisation, led by Eldert van Oosten.",
      en, "/en/", lang="en", ld=[BUSINESS, PERSON], alt={"nl": "/", "en": "/en/"})
 
 # ---------------------------------------------------------------- 404
@@ -615,18 +635,18 @@ nf = f"""
     <div class="btns"><a class="btn btn-primary" href="/">Naar home</a><a class="btn btn-ghost" href="/saxofoonles/">Saxofoonles</a><a class="btn btn-ghost" href="/jazzworkshops/">Jazzworkshops</a></div>
   </div>
 </header>"""
-page("/404.html", "Pagina niet gevonden | Eldert van Oosten", "Deze pagina bestaat niet.", nf, "")
+page("/404.html", "Pagina niet gevonden | 2nd Floor Jazz School", "Deze pagina bestaat niet.", nf, "")
 html404 = open(os.path.join(OUT, "404.html")).read().replace('<link rel="canonical"', '<meta name="robots" content="noindex">\n<link rel="canonical"')
 open(os.path.join(OUT, "404.html"), "w").write(html404)
 
 # ---------------------------------------------------------------- meta files
-urls = [("/", "1.0"), ("/saxofoonles/", "0.9"), ("/jazzworkshops/", "0.9"), ("/over/", "0.6"), ("/contact/", "0.7"), ("/en/", "0.6")]
+urls = [("/", "1.0"), ("/jazzworkshops/", "0.9"), ("/saxofoonles/", "0.8"), ("/docent/", "0.6"), ("/contact/", "0.7"), ("/en/", "0.6")]
 open(os.path.join(OUT, "sitemap.xml"), "w").write(
     '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
     "".join(f"  <url><loc>{SITE}{u}</loc><lastmod>2026-10-17</lastmod><priority>{p}</priority></url>\n" for u, p in urls) + "</urlset>\n")
 open(os.path.join(OUT, "robots.txt"), "w").write(f"User-agent: *\nAllow: /\n\nSitemap: {SITE}/sitemap.xml\n")
 open(os.path.join(OUT, "site.webmanifest"), "w").write(json.dumps({
-    "name": "Eldert van Oosten — Saxofoonles & Jazzworkshops", "short_name": "Eldert", "start_url": "/",
+    "name": "2nd Floor Jazz School", "short_name": "2nd Floor", "start_url": "/",
     "icons": [{"src": "/assets/img/icon-192.png", "sizes": "192x192", "type": "image/png"}, {"src": "/assets/img/icon-512.png", "sizes": "512x512", "type": "image/png"}],
     "theme_color": "#17161b", "background_color": "#f5f0e6", "display": "browser"}, indent=2))
 print("built")
