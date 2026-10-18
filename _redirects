@@ -1,0 +1,8 @@
+# Netlify / Cloudflare Pages: redirect old URLs from previous versions of the site
+/home                       /               301
+/Saxofoonles-Beginners      /saxofoonles/   301
+/Saxofoonles-Gevorderden    /saxofoonles/   301
+/prijzen                    /saxofoonles/   301
+/biografie                  /over/          301
+/muziek                     /over/          301
+/portfolio-details.html     /over/          301

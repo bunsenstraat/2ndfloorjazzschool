@@ -1,0 +1,20 @@
+{
+  "name": "Eldert van Oosten \u2014 Saxofoonles & Jazzworkshops",
+  "short_name": "Eldert",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "/assets/img/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/img/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#17161b",
+  "background_color": "#f5f0e6",
+  "display": "browser"
+}
