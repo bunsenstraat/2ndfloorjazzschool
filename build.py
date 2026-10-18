@@ -6,8 +6,8 @@ PHONE_DISPLAY = "06 434 88 440"
 PHONE_TEL = "+31643488440"
 WA = "https://wa.me/31643488440"
 EMAIL = "eldertvanoosten@gmail.com"
-STREET = "Stuyvesantstraat 10-1"
-POSTCODE = "1058 AL"
+STREET = "Jacob van Lennepstraat 157"
+POSTCODE = "1053 HW"
 CITY = "Amsterdam"
 SCHOOL = "2nd Floor Jazz School"
 ASSET_V = "5"  # bump after changing style.css or main.js so browsers fetch the new file
@@ -540,7 +540,7 @@ contact = f"""
       <a class="contact-tile" href="tel:{PHONE_TEL}"><small>Bellen</small><b>{PHONE_DISPLAY}</b><span>Eldert van Oosten</span></a>
       <a class="contact-tile" href="{WA}"><small>WhatsApp</small><b>Stuur een appje</b><span>Meestal dezelfde dag antwoord</span></a>
       <a class="contact-tile" href="mailto:{EMAIL}?subject=Jazzworkshop%20%2F%20saxofoonles"><small>E-mail</small><b>{EMAIL}</b><span>Vertel kort wat je speelt en zoekt</span></a>
-      <a class="contact-tile" href="https://www.google.com/maps/search/?api=1&amp;query=Stuyvesantstraat+10+Amsterdam" rel="noopener"><small>Studio</small><b>{STREET}</b><span>{POSTCODE} {CITY} (West) · route →</span></a>
+      <a class="contact-tile" href="https://www.google.com/maps/search/?api=1&amp;query={STREET.replace(" ", "+")}+{POSTCODE.replace(" ", "+")}+{CITY}" rel="noopener"><small>Studio</small><b>{STREET}</b><span>{POSTCODE} {CITY} (West) · route →</span></a>
     </div>
   </div>
 </section>
