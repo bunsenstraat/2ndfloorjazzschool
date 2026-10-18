@@ -10,7 +10,7 @@ STREET = "Jacob van Lennepstraat 157"
 POSTCODE = "1053 HW"
 CITY = "Amsterdam"
 SCHOOL = "2nd Floor Jazz School"
-ASSET_V = "5"  # bump after changing style.css or main.js so browsers fetch the new file
+ASSET_V = "7"  # bump after changing style.css or main.js so browsers fetch the new file
 MARK = '<svg class="mark" width="36" height="36" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="6" fill="#17161b"/><rect x="7" y="8" width="18" height="3.2" rx="1.6" fill="#e2b765"/><rect x="7" y="14.4" width="18" height="3.2" rx="1.6" fill="#f5f0e6" fill-opacity=".5"/><rect x="7" y="20.8" width="18" height="3.2" rx="1.6" fill="#f5f0e6" fill-opacity=".5"/></svg>'
 
 ICON = {
@@ -117,7 +117,7 @@ def page(path, title, desc, body, current, lang="nl", ld=(), alt=None):
 <a class="skip" href="#main">{T('Naar de inhoud', 'Skip to content')}</a>
 <header class="site-header">
   <div class="wrap">
-    <a class="brand" href="{T('/', '/en/')}">{MARK}<span class="brand-text"><strong>2nd Floor Jazz School</strong><span>{T('Jazzworkshops Amsterdam', 'Jazz workshops Amsterdam')}</span></span></a>
+    <a class="brand" href="{T('/', '/en/')}"><img src="/assets/img/logo.svg" width="667" height="103" alt="2nd Floor Jazz School"></a>
     <button class="nav-toggle" aria-expanded="false" aria-controls="nav"><span></span>Menu</button>
     <nav class="nav" id="nav" aria-label="{T('Hoofdmenu', 'Main menu')}"><ul>{items}</ul></nav>
   </div>
@@ -128,7 +128,7 @@ def page(path, title, desc, body, current, lang="nl", ld=(), alt=None):
 <footer class="site-footer">
   <div class="wrap">
     <div>
-      <strong>2nd Floor Jazz School</strong>
+      <img class="footer-logo" src="/assets/img/logo-inverse.svg" width="667" height="103" alt="2nd Floor Jazz School" loading="lazy">
       <p>{T('Jazzworkshops en saxofoonles voor volwassenen in Amsterdam-West, onder leiding van jazzsaxofonist Eldert van Oosten.', 'Jazz workshops and saxophone lessons for adults in Amsterdam-West, led by jazz saxophonist Eldert van Oosten.')}</p>
     </div>
     <div>

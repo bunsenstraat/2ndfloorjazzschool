@@ -2,3 +2,5 @@
 .claude/
 __pycache__/
 *.zone
+brand/sketches/
+brand/exports/

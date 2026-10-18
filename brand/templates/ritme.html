@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Ritme — 2nd Floor Jazz School template</title>
+<link rel="stylesheet" href="flyer.css">
+<style>
+.cover { background: var(--bg, var(--yellow)); color: var(--ink); }
+.bars { left: 5cqw; right: 5cqw; top: 5cqw; height: 50cqw; display: flex; gap: 1.8cqw; align-items: flex-end; }
+.bars i { flex: 1; background: var(--ink); }
+.title { left: 5cqw; right: 5cqw; top: 59cqw; font-size: 14cqw; line-height: .82; }
+.title span { display: block; }
+.title span + span { color: var(--paper); }
+.info { left: 5.3cqw; bottom: 5.3cqw; }
+.logo { right: 5cqw; bottom: 5.3cqw; width: 34cqw; }
+
+/* A4 flyer: same idea, more room */
+.a4 .bars { top: 6cqw; height: 66cqw; gap: 2cqw; }
+.a4 .title { top: 78cqw; font-size: 19cqw; }
+.a4 .info { bottom: auto; top: 113cqw; font-size: 3cqw; }
+.a4 .contact { left: 5.3cqw; bottom: 6cqw; }
+.a4 .logo { bottom: 6cqw; width: 40cqw; }
+.a4 .rule { left: 5.3cqw; right: 5cqw; bottom: 14cqw; height: .5cqw; background: var(--ink); }
+.square .contact, .square .rule { display: none; }
+</style>
+</head>
+<body>
+<div class="cover">
+  <div class="bars" id="bars"></div>
+  <div class="title X" id="title"></div>
+  <div class="info small" id="info"></div>
+  <div class="rule"></div>
+  <div class="contact" id="contact"></div>
+  <img class="logo" src="logo-ink.svg" alt="2nd Floor Jazz School">
+</div>
+<div class="help">Pas de tekst aan via de adresbalk, bijv.<br>
+<code>?t1=Samen&amp;t2=spelen&amp;info=Vaste groepen|alle instrumenten</code><br>
+Opties: <code>format=square|a4</code>, <code>bg=yellow|orange|blue|green</code>, <code>bars=30,62,45,…</code> (hoogtes in %), <code>contact=…</code></div>
+<script>
+const q = new URLSearchParams(location.search);
+const get = (k, d) => q.get(k) ?? d;
+document.documentElement.classList.add(get('format', 'square'));
+if (q.has('export')) document.documentElement.classList.add('export');
+if (q.has('nograin')) document.documentElement.classList.add('nograin');
+const bg = get('bg', 'yellow');
+document.querySelector('.cover').style.setProperty('--bg', bg.startsWith('#') ? bg : `var(--${bg})`);
+document.getElementById('title').innerHTML = [get('t1', 'Samen'), get('t2', 'spelen')].filter(Boolean).map(t => `<span>${t}</span>`).join('');
+document.getElementById('info').innerHTML = get('info', 'Vaste groepen|Alle instrumenten').split('|').join('<br>');
+document.getElementById('contact').innerHTML = get('contact', '2ndfloorjazzschool.nl|06 434 88 440').split('|').join('<br>');
+document.getElementById('bars').innerHTML = get('bars', '30,62,45,100,20,78,52,88,36,70').split(',').map(h => `<i style="height:${h}%"></i>`).join('');
+</script>
+</body>
+</html>

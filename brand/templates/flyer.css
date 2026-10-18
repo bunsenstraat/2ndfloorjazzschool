@@ -1,0 +1,37 @@
+/* Shared styles for 2nd Floor Jazz School flyer / post templates.
+   Every size is in cqw (percent of the cover's width), so one layout scales to any pixel size. */
+@font-face { font-family: "Archivo"; src: url("../fonts/archivo-normal-100-900.woff2") format("woff2"); font-weight: 100 900; font-stretch: 62% 125%; }
+@font-face { font-family: "Instrument Serif"; src: url("../../assets/fonts/instrument-serif-italic.woff2") format("woff2"); font-style: italic; }
+@font-face { font-family: "Hanken Grotesk"; src: url("../../assets/fonts/hanken-grotesk.woff2") format("woff2"); font-weight: 400 700; }
+
+:root { --paper: #efe6d2; --ink: #141317; --orange: #de6b1f; --yellow: #e6b532; --blue: #2a5d93; --green: #4f7a3f; }
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: #8d877b; display: grid; place-items: center; min-height: 100vh; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+/* the cover itself */
+.cover { position: relative; overflow: hidden; container-type: inline-size; width: min(92vw, 92vh); aspect-ratio: 1; }
+.a4 .cover { width: min(92vw, calc(92vh * 210 / 297)); aspect-ratio: 210 / 297; }
+.cover > * { position: absolute; }
+
+/* exporting: the cover fills the whole viewport / page */
+.export body { background: none; display: block; min-height: 0; }
+.export .cover { width: 100vw; }
+@page { size: A4; margin: 0; }
+@media print { body { background: none; display: block; min-height: 0; } .cover { width: 210mm; } }
+
+/* print grain, as on old sleeves */
+.cover::after { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 9; mix-blend-mode: multiply; opacity: .45;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .3 0 0 0 0 .22 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+.nograin .cover::after { display: none; }
+
+.X { font-family: "Archivo", "Arial Narrow", sans-serif; font-weight: 900; font-stretch: 62%; text-transform: uppercase; letter-spacing: -.01em; }
+.small { font: 700 2.5cqw/1.45 "Hanken Grotesk"; letter-spacing: .18em; text-transform: uppercase; }
+.logo { display: block; height: auto; }
+.contact { font: 700 2.3cqw/1.3 "Hanken Grotesk"; letter-spacing: .12em; text-transform: uppercase; }
+
+/* help panel (not exported) */
+.help { position: fixed; right: 1rem; top: 1rem; max-width: 26rem; background: rgba(20,19,23,.88); color: #efe6d2; font: 400 13px/1.45 "Hanken Grotesk", sans-serif; padding: .8rem 1rem; border-radius: 6px; }
+.help code { color: #e6b532; }
+.export .help { display: none; }
+@media print { .help { display: none; } }
