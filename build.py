@@ -10,7 +10,7 @@ STREET = "Jacob van Lennepstraat 157"
 POSTCODE = "1053 HW"
 CITY = "Amsterdam"
 SCHOOL = "2nd Floor Jazz School"
-ASSET_V = "7"  # bump after changing style.css or main.js so browsers fetch the new file
+ASSET_V = "9"  # bump after changing style.css or main.js so browsers fetch the new file
 MARK = '<svg class="mark" width="36" height="36" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="6" fill="#17161b"/><rect x="7" y="8" width="18" height="3.2" rx="1.6" fill="#e2b765"/><rect x="7" y="14.4" width="18" height="3.2" rx="1.6" fill="#f5f0e6" fill-opacity=".5"/><rect x="7" y="20.8" width="18" height="3.2" rx="1.6" fill="#f5f0e6" fill-opacity=".5"/></svg>'
 
 ICON = {
@@ -109,7 +109,7 @@ def page(path, title, desc, body, current, lang="nl", ld=(), alt=None):
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
-<link rel="preload" href="/assets/fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/archivo-condensed.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/hanken-grotesk.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/style.css?v={ASSET_V}">
 {lds}</head>
@@ -169,8 +169,11 @@ def contact_buttons(lang="nl"):
 
 def cta(title_html, text, lang="nl"):
     T = (lambda nl, en: en) if lang == "en" else (lambda nl, en: nl)
-    return f"""<section class="section-dark cta-band">
+    bars = "".join(f'<i style="height:{h}%"></i>' for h in (30, 62, 45, 100, 20, 78, 52, 88, 36, 70, 58, 26))
+    return f"""<section class="cta-band">
   <div class="wrap">
+    <div class="bars" aria-hidden="true">{bars}</div>
+    <div class="cta-row">
     <div>
       <span class="track" data-n="♪">{T('Aanmelden', 'Get in touch')}</span>
       <h2>{title_html}</h2>
@@ -180,6 +183,7 @@ def cta(title_html, text, lang="nl"):
       <a class="btn btn-primary" href="tel:{PHONE_TEL}">{ICON['phone']}{PHONE_DISPLAY}</a>
       <a class="btn btn-ghost" href="{WA}">{ICON['wa']}WhatsApp</a>
       <a class="btn btn-ghost" href="mailto:{EMAIL}">{ICON['mail']}E-mail</a>
+    </div>
     </div>
   </div>
 </section>"""
@@ -199,7 +203,8 @@ home = f"""
   <div class="wrap">
     <div>
       <span class="track" data-n="A1">Amsterdam-West · voor volwassenen</span>
-      <h1><em>Jazzworkshops</em> in Amsterdam<span class="small">met jazzsaxofonist Eldert van Oosten</span></h1>
+      <h1 class="broken"><span class="hy">Jazz</span><span class="hy">work</span><span>shops</span> <span class="in">in Amsterdam</span></h1>
+      <p class="kicker">met jazzsaxofonist Eldert van Oosten</p>
       <div class="gear">
         <span class="gear-label">In de studio staan klaar</span>
         <ul><li>Contrabas</li><li>Drumstel</li><li>Piano</li><li>Versterkers</li></ul>
@@ -224,7 +229,7 @@ home = f"""
     <div class="cards">
       <a class="card" href="/jazzworkshops/">
         <span class="side">Kant A</span>
-        {img("workshop-9", "Groepsfoto van de deelnemers aan de jazzworkshop met hun instrumenten", 1200, 900, sizes="(max-width: 44rem) 100vw, 50vw")}
+        <span class="duo">{img("workshop-9", "Groepsfoto van de deelnemers aan de jazzworkshop met hun instrumenten", 1200, 900, sizes="(max-width: 44rem) 100vw, 50vw")}</span>
         <div class="card-body">
           <h3>Jazzworkshops</h3>
           <p>Samenspel, ritmiek en improviseren over akkoordenschema’s in een vaste groep. Voor volwassen muzikanten met enige jazzervaring, alle instrumenten.</p>
@@ -233,7 +238,7 @@ home = f"""
       </a>
       <a class="card" href="/saxofoonles/">
         <span class="side">Kant B</span>
-        {img("workshop-1", "Saxofoniste speelt altsaxofoon in de tuin", 900, 1200, sizes="(max-width: 44rem) 100vw, 50vw").replace('alt=', 'style="object-position:50% 20%" alt=')}
+        <span class="duo blue">{img("workshop-1", "Saxofoniste speelt altsaxofoon in de tuin", 900, 1200, sizes="(max-width: 44rem) 100vw, 50vw").replace('alt=', 'style="object-position:50% 20%" alt=')}</span>
         <div class="card-body">
           <h3>Saxofoonles</h3>
           <p>Privéles voor volwassenen bij Eldert, van de allereerste toon tot jazzimprovisatie. Ook een goede opstap naar de workshop.</p>
@@ -265,7 +270,7 @@ home = f"""
   </div>
 </section>
 
-<section class="section-alt">
+<section class="section-dark">
   <div class="wrap">
     <div class="section-head">
       <span class="track" data-n="A4">In beeld</span>
@@ -571,7 +576,8 @@ en = f"""
   <div class="wrap">
     <div>
       <span class="track" data-n="A1">Amsterdam-West · for adults</span>
-      <h1><em>Jazz workshops</em> in Amsterdam<span class="small">with jazz saxophonist Eldert van Oosten</span></h1>
+      <h1 class="broken" aria-label="Jazz workshops in Amsterdam"><span class="hy">Jazz</span><span class="hy">work</span><span>shops</span> <span class="in">in Amsterdam</span></h1>
+      <p class="kicker">with jazz saxophonist Eldert van Oosten</p>
       <div class="gear">
         <span class="gear-label">Ready in the studio</span>
         <ul><li>Double bass</li><li>Drums</li><li>Piano</li><li>Amps</li></ul>
