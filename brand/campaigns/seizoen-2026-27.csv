@@ -1,0 +1,7 @@
+name,template,formats,t1,t2,w,side,info,bg,accent,size,bars,page,qrlabel
+improviseren,gebroken-woord,,,,Im-pro-vi-se-ren,over|akkoorden-|schema’s,Jazzworkshop|voor volwassenen,,,,,,
+samen-spelen,ritme,,Samen,spelen,,,Vaste groepen|alle instrumenten,yellow,,,,,
+breng-je-instrument,ritme,,Breng je,instrument,,,Contrabas · drums|piano · versterkers|staan klaar,blue,,,"30,45,62,100,78,88,52,70,40,58",,
+samenspel,gebroken-woord,,,,Sa-men-spel,luisteren|en|reageren,Jazzworkshop|voor volwassenen,,green,,,,
+walkin-woord,gebroken-woord,,,,Walk-in’,één sessie|zonder|publiek,Walkin’ Workshop|losse sessie,,blue,,,/jazzworkshops/,Aanmelden|per sessie
+walkin-ritme,ritme,,Walkin’,workshop,,,Eén sessie · geen publiek|meld je aan per keer,orange,,,,/jazzworkshops/,Aanmelden|per sessie

@@ -47,3 +47,26 @@ Exporteren naar een vierkante post (1080×1080 PNG) en een A4-flyer (PDF + PNG):
 ```
 
 Bestanden komen in `exports/` (niet in git).
+
+## Campagnes: alles in één keer
+Zet een hele campagne in een lijst (`campaigns/<naam>.csv`, te bewerken in Excel of Numbers) met één regel per poster:
+
+| Kolom | Betekenis |
+|---|---|
+| `name` | bestandsnaam, bijv. `improviseren` |
+| `template` | `ritme` of `gebroken-woord` |
+| `formats` | optioneel: `post`, `a4` of beide (standaard beide) |
+| overige kolommen | template-opties: `t1`, `t2`, `w`, `side`, `info`, `bg`, `accent`, `size`, `bars`, `page`, `qrlabel`; leeg = standaard |
+
+Gebruik `|` voor een nieuwe regel in een tekst. Daarna:
+
+```
+python3 campaign.py campaigns/seizoen-2026-27.csv            # alles
+python3 campaign.py campaigns/seizoen-2026-27.csv walkin     # alleen regels met "walkin" in de naam
+```
+
+Per poster: `exports/<campagne>/<naam>-post.png` (1080×1080), `<naam>-a4.png` en `<naam>-a4.pdf`.
+
+**QR-code:** elke A4-flyer krijgt rechtsonder een QR-code naar de site (standaard `/jazzworkshops/`, of de pagina in kolom `page`).
+De link bevat de campagne- en posternaam (`utm_campaign`, `utm_content`), zodat je in de statistieken kunt zien welke flyer bezoekers oplevert.
+`qr=none` laat de code weg.

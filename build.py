@@ -10,7 +10,7 @@ STREET = "Jacob van Lennepstraat 157"
 POSTCODE = "1053 HW"
 CITY = "Amsterdam"
 SCHOOL = "2nd Floor Jazz School"
-ASSET_V = "9"  # bump after changing style.css or main.js so browsers fetch the new file
+ASSET_V = "10"  # bump after changing style.css or main.js so browsers fetch the new file
 MARK = '<svg class="mark" width="36" height="36" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="6" fill="#17161b"/><rect x="7" y="8" width="18" height="3.2" rx="1.6" fill="#e2b765"/><rect x="7" y="14.4" width="18" height="3.2" rx="1.6" fill="#f5f0e6" fill-opacity=".5"/><rect x="7" y="20.8" width="18" height="3.2" rx="1.6" fill="#f5f0e6" fill-opacity=".5"/></svg>'
 
 ICON = {
@@ -35,7 +35,7 @@ BUSINESS = {
     "logo": SITE + "/assets/img/icon-512.png",
     "telephone": PHONE_TEL,
     "email": EMAIL,
-    "priceRange": "€€",
+    "priceRange": "€20 per workshop",
     "address": {"@type": "PostalAddress", "streetAddress": STREET, "postalCode": POSTCODE.replace(" ", ""), "addressLocality": CITY, "addressRegion": "Noord-Holland", "addressCountry": "NL"},
     "areaServed": {"@type": "City", "name": "Amsterdam"},
     "founder": {"@id": SITE + "/#eldert"},
@@ -189,6 +189,15 @@ def cta(title_html, text, lang="nl"):
 </section>"""
 
 
+def practical(lang="nl"):
+    T = (lambda nl, en: en) if lang == "en" else (lambda nl, en: nl)
+    return f"""<ul class="practical">
+      <li class="hot"><b>€20</b><span>{T('per persoon per workshop', 'per person per workshop')}</span></li>
+      <li><b>{T('1,5 uur', '90 min')}</b><span>{T('per workshop', 'per workshop')}</span></li>
+      <li><b>{T('Ma · Di · Wo', 'Mon · Tue · Wed')}</b><span>{T('tijd in overleg met Eldert', 'time by arrangement with Eldert')}</span></li>
+    </ul>"""
+
+
 def img(name, alt, w, h, cls="", eager=False, sizes="(max-width: 44rem) 50vw, 25vw"):
     load = 'fetchpriority="high"' if eager else 'loading="lazy" decoding="async"'
     if os.path.exists(os.path.join(OUT, f"assets/img/{name}-sm.webp")):
@@ -233,6 +242,7 @@ home = f"""
         <div class="card-body">
           <h3>Jazzworkshops</h3>
           <p>Samenspel, ritmiek en improviseren over akkoordenschema’s in een vaste groep. Voor volwassen muzikanten met enige jazzervaring, alle instrumenten.</p>
+          <p class="card-meta">€20 p.p. · 1,5 uur · ma, di of wo</p>
           <span class="more">Over de workshops</span>
         </div>
       </a>
@@ -385,6 +395,8 @@ ws_faq = [
     ("Welke instrumenten kunnen meedoen?", "Blazers (saxofoon, trompet, trombone, klarinet, fluit), piano en toetsen, gitaar, contrabas en basgitaar, drums en zang. Piano, contrabas, drumstel en versterkers zijn in de studio aanwezig."),
     ("Wat speel je in de workshop?", "Jazzstandards, blues, latin, eigen stukken en muziek uit het wereldrepertoire. We werken aan een eigen repertoire als groep."),
     ("Treden we ook op?", "Ja, optreden is een belangrijk onderdeel van de cursus. De groepen sluiten af met een uitvoering, onder meer op Buurtboerderij Ons Genoegen."),
+    ("Wat kost een workshop?", "€20 per persoon per workshop van 1,5 uur."),
+    ("Op welke dagen en tijden zijn de workshops?", "Op maandag, dinsdag en woensdag. De tijd spreek je af in overleg met Eldert."),
     ("Hoe meld ik me aan?", "Bel, app of mail. We bespreken je ervaring en kijken in welke groep je het beste past. Er is regelmatig plek voor nieuwe deelnemers."),
 ]
 ws = f"""
@@ -398,6 +410,7 @@ ws = f"""
       <ul><li>Contrabas</li><li>Drumstel</li><li>Piano</li><li>Versterkers</li></ul>
     </div>
     <p class="lead">Neem je eigen instrument mee — de rest staat er. Bij de 2nd Floor Jazz School werken volwassen muzikanten met enige jazzervaring aan samenspel, ritmiek en improviseren over akkoordenschema’s, onder leiding van jazzsaxofonist Eldert van Oosten.</p>
+    {practical()}
     {contact_buttons()}
   </div>
 </header>
@@ -456,9 +469,14 @@ ws = f"""
 {cta('Speel mee in een <em>jazzgroep</em>', 'Er is regelmatig ruimte voor nieuwe deelnemers. Laat weten wat je speelt en hoe lang al — dan zoeken we de groep die bij je past.')}
 """
 page("/jazzworkshops/", "Jazzworkshop Amsterdam | Improvisatie & samenspel",
-     "Jazzworkshops in Amsterdam-West: leer improviseren en samenspelen in een vaste groep. Voor volwassenen met enige jazzervaring, alle instrumenten.",
+     "Jazzworkshops in Amsterdam-West voor volwassenen met enige jazzervaring: samenspelen en improviseren. €20 per workshop van 1,5 uur, op ma, di en wo.",
      ws, "/jazzworkshops/", ld=[BUSINESS, faq_ld(ws_faq), crumbs_ld([("/", "Home"), ("/jazzworkshops/", "Jazzworkshops")]),
-     {"@context": "https://schema.org", "@type": "Course", "name": "Jazzworkshop: improvisatie en samenspel", "description": "Wekelijkse jazzworkshop in Amsterdam-West voor volwassen muzikanten met enige jazzervaring, alle instrumenten: samenspel, ritmiek, improvisatie over akkoordenschema’s en optreden.", "inLanguage": "nl", "provider": {"@id": SITE + "/#business"}}],
+     {"@context": "https://schema.org", "@type": "Course", "name": "Jazzworkshop: improvisatie en samenspel", "description": "Wekelijkse jazzworkshop in Amsterdam-West voor volwassen muzikanten met enige jazzervaring, alle instrumenten: samenspel, ritmiek, improvisatie over akkoordenschema’s en optreden.", "inLanguage": "nl", "provider": {"@id": SITE + "/#business"},
+      "offers": {"@type": "Offer", "price": "20", "priceCurrency": "EUR", "category": "Per persoon per workshop (1,5 uur)"},
+      "hasCourseInstance": {"@type": "CourseInstance", "courseMode": "onsite", "courseWorkload": "PT1H30M",
+        "location": {"@id": SITE + "/#business"},
+        "courseSchedule": {"@type": "Schedule", "repeatFrequency": "P1W", "duration": "PT1H30M",
+          "byDay": ["https://schema.org/Monday", "https://schema.org/Tuesday", "https://schema.org/Wednesday"]}}}],
      alt={"nl": "/jazzworkshops/", "en": "/en/"})
 
 # ---------------------------------------------------------------- DOCENT
@@ -598,6 +616,7 @@ en = f"""
       <h2>Learn to <em>play together</em></h2>
       <p>The 2nd Floor Jazz School runs small, regular groups working on jazz standards, blues, latin and original tunes: ensemble playing, rhythm and improvising over chord changes. Every season ends with a concert.</p>
       <p>For adult musicians on any instrument who have some jazz experience. You don’t need to be an experienced improviser — that’s what the group is for — but a basic grounding in jazz is needed to take part. Not sure? Get in touch and we’ll talk about your level.</p>
+      {practical("en")}
     </div>
     <div id="lessons">
       <span class="track" data-n="A3">Saxophone lessons</span>

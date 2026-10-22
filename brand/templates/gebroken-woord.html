@@ -30,30 +30,29 @@
   <div class="info small" id="info"></div>
   <div class="rule"></div>
   <div class="contact" id="contact"></div>
+  <div class="qr" id="qr"><span id="qr-label"></span><div class="code"></div></div>
   <img class="logo" src="logo.svg" alt="2nd Floor Jazz School">
 </div>
 <div class="help">Pas de tekst aan via de adresbalk, bijv.<br>
 <code>?w=Im-pro-vi-se-ren&amp;side=over|akkoorden-|schema’s</code><br>
-Het woord wordt bij elk <code>-</code> afgebroken; elke regel verspringt. Opties: <code>format=square|a4</code>, <code>accent=orange|blue|green</code>, <code>size=16</code> (lettergrootte), <code>info=…</code>, <code>contact=…</code></div>
+Het woord wordt bij elk <code>-</code> afgebroken; elke regel verspringt. Opties: <code>format=square|a4</code>, <code>accent=orange|blue|green</code>, <code>size=16</code> (lettergrootte), <code>info=…</code>, <code>contact=…</code>, <code>qr=none</code></div>
+<script src="vendor/qrcode.js"></script>
+<script src="flyer.js"></script>
 <script>
-const q = new URLSearchParams(location.search);
-const get = (k, d) => q.get(k) ?? d;
-const fmt = get('format', 'square');
-document.documentElement.classList.add(fmt);
-if (q.has('export')) document.documentElement.classList.add('export');
-if (q.has('nograin')) document.documentElement.classList.add('nograin');
 const cover = document.querySelector('.cover');
-const acc = get('accent', 'orange');
-cover.style.setProperty('--accent', acc.startsWith('#') ? acc : `var(--${acc})`);
-if (q.has('size')) cover.style.setProperty('--fs', q.get('size') + 'cqw');
+cover.style.setProperty('--accent', colour(get('accent', 'orange')));
 // syllables: every piece but the last keeps its hyphen; each line steps in by a different amount
 const parts = get('w', 'Im-pro-vi-se-ren').split('-');
-const steps = fmt === 'a4' ? [0, 22, 7, 34, 12, 26] : [0, 18, 6, 30, 10, 24];
-document.getElementById('word').innerHTML = parts.map((p, i) =>
-  `<span style="margin-left:${steps[i % steps.length]}cqw">${p}${i < parts.length - 1 ? '-' : ''}</span>`).join('');
-document.getElementById('side').innerHTML = get('side', 'over|akkoorden-|schema’s').split('|').join('<br>');
-document.getElementById('info').innerHTML = get('info', 'Jazzworkshop|voor volwassenen').split('|').join('<br>');
-document.getElementById('contact').innerHTML = get('contact', '2ndfloorjazzschool.nl|06 434 88 440').split('|').join('<br>');
+// short words get bigger letters unless a size is given
+if (q.has('size')) cover.style.setProperty('--fs', q.get('size') + 'cqw');
+else if (parts.length <= 2) cover.style.setProperty('--fs', FORMAT === 'a4' ? '34cqw' : '26cqw');
+// on A4 a short, big word fills the width, so the side note moves underneath it
+if (parts.length <= 2 && FORMAT === 'a4') document.getElementById('side').style.cssText = 'top:72cqw;font-size:10cqw';
+const steps = FORMAT === 'a4' ? [0, 22, 7, 34, 12, 26] : [0, 18, 6, 30, 10, 24];
+fill('word', parts.map((p, i) =>
+  `<span style="margin-left:${steps[i % steps.length]}cqw">${p}${i < parts.length - 1 ? '-' : ''}</span>`).join(''));
+fill('side', lines(get('side', 'over|akkoorden-|schema’s')));
+fill('info', lines(get('info', 'Jazzworkshop|voor volwassenen')));
 </script>
 </body>
 </html>

@@ -33,23 +33,19 @@
   <div class="info small" id="info"></div>
   <div class="rule"></div>
   <div class="contact" id="contact"></div>
+  <div class="qr" id="qr"><span id="qr-label"></span><div class="code"></div></div>
   <img class="logo" src="logo-ink.svg" alt="2nd Floor Jazz School">
 </div>
 <div class="help">Pas de tekst aan via de adresbalk, bijv.<br>
 <code>?t1=Samen&amp;t2=spelen&amp;info=Vaste groepen|alle instrumenten</code><br>
-Opties: <code>format=square|a4</code>, <code>bg=yellow|orange|blue|green</code>, <code>bars=30,62,45,…</code> (hoogtes in %), <code>contact=…</code></div>
+Opties: <code>format=square|a4</code>, <code>bg=yellow|orange|blue|green</code>, <code>bars=30,62,45,…</code> (hoogtes in %), <code>contact=…</code>, <code>qr=none</code></div>
+<script src="vendor/qrcode.js"></script>
+<script src="flyer.js"></script>
 <script>
-const q = new URLSearchParams(location.search);
-const get = (k, d) => q.get(k) ?? d;
-document.documentElement.classList.add(get('format', 'square'));
-if (q.has('export')) document.documentElement.classList.add('export');
-if (q.has('nograin')) document.documentElement.classList.add('nograin');
-const bg = get('bg', 'yellow');
-document.querySelector('.cover').style.setProperty('--bg', bg.startsWith('#') ? bg : `var(--${bg})`);
-document.getElementById('title').innerHTML = [get('t1', 'Samen'), get('t2', 'spelen')].filter(Boolean).map(t => `<span>${t}</span>`).join('');
-document.getElementById('info').innerHTML = get('info', 'Vaste groepen|Alle instrumenten').split('|').join('<br>');
-document.getElementById('contact').innerHTML = get('contact', '2ndfloorjazzschool.nl|06 434 88 440').split('|').join('<br>');
-document.getElementById('bars').innerHTML = get('bars', '30,62,45,100,20,78,52,88,36,70').split(',').map(h => `<i style="height:${h}%"></i>`).join('');
+document.querySelector('.cover').style.setProperty('--bg', colour(get('bg', 'yellow')));
+fill('title', [get('t1', 'Samen'), get('t2', 'spelen')].filter(Boolean).map(t => `<span>${t}</span>`).join(''));
+fill('info', lines(get('info', 'Vaste groepen|Alle instrumenten')));
+fill('bars', get('bars', '30,62,45,100,20,78,52,88,36,70').split(',').map(h => `<i style="height:${h}%"></i>`).join(''));
 </script>
 </body>
 </html>

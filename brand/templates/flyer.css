@@ -35,3 +35,11 @@ body { background: #8d877b; display: grid; place-items: center; min-height: 100v
 .help code { color: #e6b532; }
 .export .help { display: none; }
 @media print { .help { display: none; } }
+
+/* QR code on A4 flyers */
+.qr { display: flex; align-items: flex-end; gap: 2cqw; right: 5cqw; bottom: 16cqw; }
+.qr .code { width: 14cqw; height: 14cqw; }
+.qr .code svg { width: 100%; height: 100%; display: block; }
+.qr .code svg rect[fill="#ffffff"], .qr .code svg rect[fill="white"] { fill: transparent; }
+.qr .code svg path, .qr .code svg rect:not([fill="#ffffff"]):not([fill="white"]) { fill: var(--ink); }
+.qr span { font: 700 1.9cqw/1.35 "Hanken Grotesk"; letter-spacing: .14em; text-transform: uppercase; text-align: right; }

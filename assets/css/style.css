@@ -338,3 +338,13 @@ a.contact-tile:hover { transform: translate(-4px, -4px); box-shadow: var(--shado
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; }
 }
+
+/* practical info: price, length, days */
+.practical { list-style: none; margin: 1.75rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .9rem; max-width: 46rem; }
+.practical li { border: 2px solid var(--ink); background: var(--paper); padding: 1rem 1.1rem 1.1rem; display: flex; flex-direction: column; gap: .45rem; }
+.practical li.hot { background: var(--orange); }
+.practical b { font: 900 clamp(2rem, 4.5vw, 2.9rem)/.9 var(--display); text-transform: uppercase; }
+.practical span { font: 700 .7rem/1.35 var(--sans); letter-spacing: .14em; text-transform: uppercase; }
+.section-alt .practical li:not(.hot) { background: var(--paper); }
+@media (max-width: 34rem) { .practical { grid-template-columns: 1fr 1fr; } .practical li:last-child { grid-column: 1 / -1; } }
+.card-meta { font: 700 .74rem/1.4 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--brass-deep); }
