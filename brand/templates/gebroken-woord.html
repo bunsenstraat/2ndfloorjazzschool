@@ -53,6 +53,20 @@ fill('word', parts.map((p, i) =>
   `<span style="margin-left:${steps[i % steps.length]}cqw">${p}${i < parts.length - 1 ? '-' : ''}</span>`).join(''));
 fill('side', lines(get('side', 'over|akkoorden-|schema’s')));
 fill('info', lines(get('info', 'Jazzworkshop|voor volwassenen')));
+// if the side note runs into the big word, move it below the word instead
+document.fonts.ready.then(() => {
+  const side = document.getElementById('side');
+  const word = document.getElementById('word');
+  const cover = document.querySelector('.cover').getBoundingClientRect();
+  const slack = cover.width * 0.01; // ignore near-touches
+  const hit = (a, b) => a.left + slack < b.right && a.right - slack > b.left && a.top + slack < b.bottom && a.bottom - slack > b.top;
+  const s = side.getBoundingClientRect();
+  if ([...word.children].some(l => hit(s, l.getBoundingClientRect()))) {
+    const top = word.getBoundingClientRect().bottom + cover.width * 0.04;
+    const limit = document.getElementById('info').getBoundingClientRect().top - cover.width * 0.03;
+    if (top + s.height < limit) side.style.top = (top - cover.top) + 'px'; // only when there is room below
+  }
+});
 </script>
 </body>
 </html>

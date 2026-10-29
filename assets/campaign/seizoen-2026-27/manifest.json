@@ -16,19 +16,35 @@
     "share": "/assets/campaign/seizoen-2026-27/samen-spelen-share.jpg"
   },
   {
-    "name": "breng-je-instrument",
-    "campaign": "seizoen-2026-27",
-    "title": "Breng je instrument, de rest staat klaar — jazzworkshops Amsterdam-West",
-    "text": "Jazzworkshops voor volwassenen met enige jazzervaring in Amsterdam-West. €20 per persoon per workshop van 1,5 uur, op maandag, dinsdag of woensdag. Contrabas, drums, piano en versterkers staan klaar: neem alleen je eigen instrument mee.",
-    "post": "/assets/campaign/seizoen-2026-27/breng-je-instrument.jpg",
-    "share": "/assets/campaign/seizoen-2026-27/breng-je-instrument-share.jpg"
-  },
-  {
     "name": "samenspel",
     "campaign": "seizoen-2026-27",
     "title": "Samenspel: luisteren en reageren — jazzworkshops in Amsterdam",
     "text": "Jazzworkshops voor volwassenen met enige jazzervaring in Amsterdam-West. €20 per persoon per workshop van 1,5 uur, op maandag, dinsdag of woensdag. Contrabas, drums, piano en versterkers staan klaar: neem alleen je eigen instrument mee.",
     "post": "/assets/campaign/seizoen-2026-27/samenspel.jpg",
     "share": "/assets/campaign/seizoen-2026-27/samenspel-share.jpg"
+  },
+  {
+    "name": "in-je-eigen-tempo",
+    "campaign": "seizoen-2026-27",
+    "title": "In je eigen tempo — jazzworkshops voor elk niveau in Amsterdam-West",
+    "text": "Van je eerste solo tot ervaren speler: in groepen op niveau leer je samenspelen en improviseren in je eigen tempo. €20 per persoon per workshop van 1,5 uur, op maandag, dinsdag of woensdag. Contrabas, drums, piano en versterkers staan klaar: neem alleen je eigen instrument mee.",
+    "post": "/assets/campaign/seizoen-2026-27/in-je-eigen-tempo.jpg",
+    "share": "/assets/campaign/seizoen-2026-27/in-je-eigen-tempo-share.jpg"
+  },
+  {
+    "name": "stap-voor-stap",
+    "campaign": "seizoen-2026-27",
+    "title": "Stap voor stap leren improviseren — jazzworkshops in Amsterdam-West",
+    "text": "Improviseren leer je stap voor stap, samen met andere muzikanten in een groep op jouw niveau. €20 per persoon per workshop van 1,5 uur, op maandag, dinsdag of woensdag. Contrabas, drums, piano en versterkers staan klaar: neem alleen je eigen instrument mee.",
+    "post": "/assets/campaign/seizoen-2026-27/stap-voor-stap.jpg",
+    "share": "/assets/campaign/seizoen-2026-27/stap-voor-stap-share.jpg"
+  },
+  {
+    "name": "speel-op-jouw-niveau",
+    "campaign": "seizoen-2026-27",
+    "title": "Speel op jouw niveau — jazzworkshops in Amsterdam-West",
+    "text": "Of je net begint met improviseren of al jaren speelt: er is een groep die bij je past. €20 per persoon per workshop van 1,5 uur, op maandag, dinsdag of woensdag. Contrabas, drums, piano en versterkers staan klaar: neem alleen je eigen instrument mee.",
+    "post": "/assets/campaign/seizoen-2026-27/speel-op-jouw-niveau.jpg",
+    "share": "/assets/campaign/seizoen-2026-27/speel-op-jouw-niveau-share.jpg"
   }
 ]

@@ -43,3 +43,6 @@ body { background: #8d877b; display: grid; place-items: center; min-height: 100v
 .qr .code svg rect[fill="#ffffff"], .qr .code svg rect[fill="white"] { fill: transparent; }
 .qr .code svg path, .qr .code svg rect:not([fill="#ffffff"]):not([fill="white"]) { fill: var(--ink); }
 .qr span { font: 700 1.9cqw/1.35 "Hanken Grotesk"; letter-spacing: .14em; text-transform: uppercase; text-align: right; }
+
+/* keep the info text clear of the QR code on A4 */
+.a4 .info { max-width: 60cqw; }

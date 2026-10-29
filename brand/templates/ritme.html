@@ -11,7 +11,7 @@
 .bars { left: 5cqw; right: 5cqw; top: 5cqw; height: 50cqw; display: flex; gap: 1.8cqw; align-items: flex-end; }
 .bars i { flex: 1; background: var(--ink); }
 .title { left: 5cqw; right: 5cqw; top: 59cqw; font-size: 14cqw; line-height: .82; }
-.title span { display: block; }
+.title span { display: block; white-space: nowrap; width: max-content; }
 .title span + span { color: var(--paper); }
 .info { left: 5.3cqw; bottom: 5.3cqw; }
 .logo { right: 5cqw; bottom: 5.3cqw; width: 34cqw; }
@@ -45,6 +45,13 @@ Opties: <code>format=square|a4</code>, <code>bg=yellow|orange|blue|green</code>,
 document.querySelector('.cover').style.setProperty('--bg', colour(get('bg', 'yellow')));
 fill('title', [get('t1', 'Samen'), get('t2', 'spelen')].filter(Boolean).map(t => `<span>${t}</span>`).join(''));
 fill('info', lines(get('info', 'Vaste groepen|Alle instrumenten')));
+// a title line that is too wide shrinks the whole title, so it never wraps into the text below
+document.fonts.ready.then(() => {
+  const title = document.getElementById('title');
+  const widest = Math.max(...[...title.children].map(s => s.getBoundingClientRect().width));
+  const room = title.getBoundingClientRect().width;
+  if (widest > room) title.style.fontSize = (parseFloat(getComputedStyle(title).fontSize) * room / widest) + 'px';
+});
 fill('bars', get('bars', '30,62,45,100,20,78,52,88,36,70').split(',').map(h => `<i style="height:${h}%"></i>`).join(''));
 </script>
 </body>
