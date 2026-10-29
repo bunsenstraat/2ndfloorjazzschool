@@ -85,7 +85,7 @@ def share_buttons(url, text, image=None, small=False, lang="nl"):
     cls = "share small" if small else "share"
     text = html.escape(text, quote=True)
     native = (f'<button type="button" class="btn btn-native" data-share-url="{url}" data-share-text="{text}"'
-              + (f' data-share-image="{image}"' if image else "") + f' hidden>{ICON["share"]}{T("Delen…", "Share…")}</button>')
+              + (f' data-share-image="{image}"' if image else "") + f' hidden>{ICON["share"]}{T("Afbeelding delen", "Share image") if image else T("Delen…", "Share…")}</button>')
     parts = [native,
              f'<a class="btn btn-fb" href="{fb}" target="_blank" rel="noopener">{ICON["fb"]}Facebook</a>',
              f'<a class="btn btn-wa" href="{wa}" target="_blank" rel="noopener">{ICON["wa"]}WhatsApp</a>']
@@ -743,7 +743,7 @@ hub = f"""
     <span class="track" data-n="♪">Delen</span>
     <h1>Posters om te <em>delen</em></h1>
     <p class="lead">Kies een poster en tik op <b>Facebook</b> of <b>WhatsApp</b>. Het bericht staat dan al klaar, met de poster en alle informatie over de workshops. Alleen nog op <b>Plaatsen</b> of <b>Verstuur</b> drukken.</p>
-    <p class="note">Op je telefoon zie je ook de knop <b>Delen…</b>: die opent het gewone deelmenu, met de poster als foto. Kies daar Facebook, WhatsApp of Instagram.</p>
+    <p class="note"><b>Facebook</b> en <b>WhatsApp</b> delen een bericht met de poster, de tekst en een link naar de site. Op je telefoon zie je ook de knop <b>Afbeelding delen</b>: die stuurt alleen de poster als foto, via het gewone deelmenu. Handig voor Instagram of je WhatsApp-status.</p>
   </div>
 </header>
 <section>
