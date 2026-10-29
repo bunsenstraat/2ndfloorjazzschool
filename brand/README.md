@@ -35,6 +35,7 @@ Templates in `templates/` (in de geest van Reid Miles' Blue Note-hoezen):
 
 - `ritme.html`: balken + twee regels tekst
 - `gebroken-woord.html`: één woord over verspringende regels
+- `foto.html`: een foto uit de site met grote letters. `layout=crop` (foto boven, kleurvlak met tekst onder) of `layout=letters` (foto ín reuzenletters, bijv. `big=Jazz`). Kies de foto met `photo=studio-drumkit` (bestandsnaam in `assets/img/` zonder `.webp`) en de uitsnede met `pos=50% 30%`.
 
 Open een template in de browser en pas de tekst aan via de adresbalk (uitleg staat linksonder op de pagina).
 Exporteren naar een vierkante post (1080×1080 PNG) en een A4-flyer (PDF + PNG):
@@ -56,7 +57,8 @@ Zet een hele campagne in een lijst (`campaigns/<naam>.csv`, te bewerken in Excel
 | `name` | bestandsnaam, bijv. `improviseren` |
 | `template` | `ritme` of `gebroken-woord` |
 | `formats` | optioneel: `post`, `a4` of beide (standaard beide) |
-| overige kolommen | template-opties: `t1`, `t2`, `w`, `side`, `info`, `bg`, `accent`, `size`, `bars`, `page`, `qrlabel`; leeg = standaard |
+| overige kolommen | template-opties: `t1`, `t2`, `w`, `side`, `info`, `bg`, `accent`, `size`, `bars`, `page`, `qrlabel`, `photo`, `layout`, `pos`, `serif`, `big`, `t2color`; leeg = standaard |
+| `share_head`, `share_sub`, `share_facts`, `share_gear` | optioneel: andere tekst in het paneel van de Facebook-afbeelding (standaard: de workshopgegevens). Gebruikt voor de saxofoonles-poster. |
 
 Gebruik `|` voor een nieuwe regel in een tekst. Daarna:
 

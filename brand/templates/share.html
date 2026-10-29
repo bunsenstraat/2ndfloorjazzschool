@@ -16,7 +16,7 @@
 html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; background: var(--ink); }
 .wrap { display: grid; grid-template-columns: 630px 570px; height: 630px; }
 .poster { width: 630px; height: 630px; object-fit: cover; display: block; }
-.panel { position: relative; padding: 46px 48px 40px 52px; color: var(--paper); display: flex; flex-direction: column; }
+.panel { position: relative; border-left: 5px solid var(--paper); padding: 46px 48px 40px 47px; color: var(--paper); display: flex; flex-direction: column; }
 .panel::after { content: ""; position: absolute; inset: 0; pointer-events: none; mix-blend-mode: screen; opacity: .07;
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
 .logo { width: 250px; display: block; margin-bottom: 34px; }

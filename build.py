@@ -696,17 +696,24 @@ for ps in posters:
     url = f"{SITE}/delen/{ps['name']}/"
     title = ps["title"] or "Jazzworkshops in Amsterdam-West — 2nd Floor Jazz School"
     text = ps["text"] or WORKSHOP_TEXT
+    lessons = ps.get("page", "").startswith("/saxofoonles")
+    if lessons:  # a poster about saxophone lessons lands on lesson information, not the workshop price
+        kicker, heading, details, more = ("Saxofoonles · Amsterdam-West", "Saxofoonles bij <em>Eldert</em>", "",
+                                          '<a href="/saxofoonles/">Alles over saxofoonles →</a>')
+    else:
+        kicker, heading, details, more = ("Jazzworkshops · Amsterdam-West", "Speel mee in een <em>jazzgroep</em>", practical(),
+                                          '<a href="/jazzworkshops/">Alles over de jazzworkshops →</a>')
     body = f"""
 <section class="hero poster-page">
   <div class="wrap">
     <figure class="poster-figure"><img src="{ps['post']}" width="1080" height="1080" alt="Poster: {title}" fetchpriority="high"></figure>
     <div>
-      <span class="track" data-n="2nd">Jazzworkshops · Amsterdam-West</span>
-      <h1>Speel mee in een <em>jazzgroep</em></h1>
+      <span class="track" data-n="2nd">{kicker}</span>
+      <h1>{heading}</h1>
       <p class="lead">{text}</p>
-      {practical()}
+      {details}
       {contact_buttons()}
-      <p style="margin-top:1.5rem"><a href="/jazzworkshops/">Alles over de jazzworkshops →</a></p>
+      <p style="margin-top:1.5rem">{more}</p>
     </div>
   </div>
 </section>

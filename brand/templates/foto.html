@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Foto — 2nd Floor Jazz School template</title>
+<link rel="stylesheet" href="flyer.css">
+<style>
+.cover { background: var(--bg, var(--orange)); color: var(--ink); }
+
+/* layout "crop": photo across the top, big letters on a colour block below (Reid Miles' tight crops) */
+.crop .photo { left: 0; right: 0; top: 0; height: 58cqw; overflow: hidden; border-bottom: .6cqw solid var(--ink); }
+.crop .photo img { width: 100%; height: 100%; object-fit: cover; object-position: var(--pos, 50% 50%); display: block; }
+.crop .title { left: 5cqw; right: 5cqw; top: 62cqw; font-size: 13.5cqw; line-height: .84; }
+.crop .title span { display: block; white-space: nowrap; width: max-content; }
+.crop .title span + span { color: var(--t2, var(--paper)); }
+.crop .serif { right: 5cqw; top: 51cqw; z-index: 2; background: var(--ink); color: var(--paper); padding: 1.2cqw 2cqw 1.5cqw; font: italic 400 4.6cqw/1 "Instrument Serif", serif; }
+.crop .info { left: 5.3cqw; bottom: 5.3cqw; }
+.crop .logo { right: 5cqw; bottom: 5.3cqw; width: 34cqw; }
+
+.a4.crop .photo { height: 76cqw; }
+.a4.crop .title { top: 81cqw; font-size: 17cqw; }
+.a4.crop .serif { top: 69cqw; font-size: 5.6cqw; }
+.a4.crop .info { bottom: auto; top: 116cqw; font-size: 3cqw; }
+
+/* layout "letters": the photo shows through giant letters on ink */
+.letters .cover { background: var(--ink); color: var(--paper); }
+.letters .big { left: 4cqw; right: 4cqw; top: 4cqw; font-size: 52cqw; line-height: .8; letter-spacing: -.02em; white-space: nowrap;
+  background-size: cover; background-position: var(--pos, 50% 50%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.letters .title { left: 5cqw; right: 5cqw; top: 50cqw; font-size: 13cqw; line-height: .84; }
+.letters .title span { display: block; white-space: nowrap; width: max-content; color: var(--t2, var(--orange)); }
+.letters .serif { left: 5.3cqw; top: 66cqw; font: italic 400 6.4cqw/1.05 "Instrument Serif", serif; color: var(--yellow); }
+.letters .info { left: 5.3cqw; bottom: 5.3cqw; color: var(--paper); }
+.letters .logo { right: 5cqw; bottom: 5.3cqw; width: 34cqw; }
+.a4.letters .big { font-size: 66cqw; top: 6cqw; }
+.a4.letters .title { top: 64cqw; font-size: 17cqw; }
+.a4.letters .serif { top: 84cqw; font-size: 7.5cqw; }
+.a4.letters .info { bottom: auto; top: 112cqw; font-size: 3cqw; }
+.a4.letters .rule { background: var(--paper); }
+
+.a4 .contact { left: 5.3cqw; bottom: 6cqw; }
+.a4 .logo { bottom: 6cqw; width: 40cqw; }
+.a4 .rule { left: 5.3cqw; right: 5cqw; bottom: 14cqw; height: .5cqw; background: var(--ink); }
+.letters .qr .code svg path, .letters .qr .code svg rect:not([fill="#ffffff"]):not([fill="white"]) { fill: var(--paper); }
+.square .contact, .square .rule { display: none; }
+.letters.square .qr, .crop.square .qr { display: none; }
+</style>
+</head>
+<body>
+<div class="cover">
+  <div class="photo"><img id="photo" alt=""></div>
+  <div class="big X" id="big"></div>
+  <div class="title X" id="title"></div>
+  <div class="serif" id="serif"></div>
+  <div class="info small" id="info"></div>
+  <div class="rule"></div>
+  <div class="contact" id="contact"></div>
+  <div class="qr" id="qr"><span id="qr-label"></span><div class="code"></div></div>
+  <img class="logo" id="logo" src="logo-ink.svg" alt="2nd Floor Jazz School">
+</div>
+<div class="help">Foto-poster. Pas de tekst aan via de adresbalk, bijv.<br>
+<code>?photo=studio-drumkit&amp;t1=Swing&amp;t2=mee&amp;serif=drums staan klaar</code><br>
+Opties: <code>layout=crop|letters</code>, <code>big=JAZZ</code> (bij letters), <code>pos=50% 30%</code> (uitsnede), <code>bg=orange|yellow|blue|green|paper</code>,
+<code>t2color=paper|ink|orange|yellow</code>, <code>info=…</code>, <code>format=square|a4</code>, <code>qr=none</code></div>
+<script src="vendor/qrcode.js"></script>
+<script src="flyer.js"></script>
+<script>
+const LAYOUT = get('layout', 'crop');
+document.documentElement.classList.add(LAYOUT);
+const cover = document.querySelector('.cover');
+cover.style.setProperty('--bg', colour(get('bg', 'orange')));
+cover.style.setProperty('--pos', get('pos', '50% 50%'));
+if (q.has('t2color')) cover.style.setProperty('--t2', colour(q.get('t2color')));
+// photos come from the website's image folder: ?photo=studio-drumkit
+const photo = get('photo', 'studio-drumkit');
+const src = photo.includes('/') ? photo : `../../assets/img/${photo}.webp`;
+if (LAYOUT === 'letters') {
+  document.querySelector('.photo').remove();
+  const big = document.getElementById('big');
+  big.textContent = get('big', 'Jazz');
+  big.style.backgroundImage = `url("${src}")`;
+  document.getElementById('logo').src = 'logo-inverse.svg';
+} else {
+  document.getElementById('big').remove();
+  document.getElementById('photo').src = src;
+}
+fill('title', [get('t1', ''), get('t2', '')].filter(Boolean).map(t => `<span>${t}</span>`).join(''));
+const serif = get('serif', '');
+if (serif) fill('serif', lines(serif)); else document.getElementById('serif').remove();
+fill('info', lines(get('info', 'Jazzworkshop|voor volwassenen')));
+// lines that are too wide shrink to fit, so nothing wraps into the text below
+document.fonts.ready.then(() => {
+  for (const id of ['big', 'title']) {
+    const el = document.getElementById(id);
+    if (!el) continue;
+    const parts = el.children.length ? [...el.children] : [el];
+    const widest = Math.max(...parts.map(s => s.scrollWidth));
+    const room = el.getBoundingClientRect().width;
+    if (widest > room) el.style.fontSize = (parseFloat(getComputedStyle(el).fontSize) * room / widest) + 'px';
+  }
+  // letters layout: stack the title and the serif line right under the big word
+  if (LAYOUT === 'letters') {
+    const c = cover.getBoundingClientRect();
+    const below = (el, gap) => el.getBoundingClientRect().bottom - c.top + c.width * gap;
+    const title = document.getElementById('title'), serifEl = document.getElementById('serif');
+    title.style.top = below(document.getElementById('big'), 0.03) + 'px';
+    if (serifEl) serifEl.style.top = below(title, 0.03) + 'px';
+  }
+});
+</script>
+</body>
+</html>

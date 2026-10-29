@@ -13,6 +13,9 @@ The CSV (comma or semicolon separated, so Excel/Numbers exports both work) has o
                 (/delen/<name>/) for Facebook and WhatsApp; empty or nee = only export
     share_title title shown in the Facebook / WhatsApp preview of the share page
     share_text  description shown in that preview
+    share_head, share_sub, share_facts, share_gear
+                optional: override the text panel of the wide preview image (default: the
+                workshop essentials); use | for line breaks, e.g. share_facts "Voor volwassenen|Alle niveaus"
     ...         every other column is a template option (t1, t2, w, side, info, bg, accent, size,
                 bars, contact, page, qr, qrlabel); leave a cell empty to use the default.
 
@@ -82,6 +85,8 @@ def main():
         publish = (row.pop("publish", "") or "").strip().lower() in ("ja", "yes", "j", "y", "1", "x")
         share_title = (row.pop("share_title", "") or "").strip()
         share_text = (row.pop("share_text", "") or "").strip()
+        panel = {k[len("share_"):]: (row.pop(k) or "").strip() for k in list(row) if k and k.startswith("share_")}
+        panel = {k: v for k, v in panel.items() if v}
         if not name or name.startswith("#") or (only and only not in name):
             continue
         page = HERE / "templates" / f"{template}.html"
@@ -95,7 +100,7 @@ def main():
             if fmt == "share":
                 poster = (out / f"{name}-post.png").as_uri()
                 share_page = HERE / "templates" / "share.html"
-                render(chrome, f"{share_page.as_uri()}?{urlencode({'poster': poster})}",
+                render(chrome, f"{share_page.as_uri()}?{urlencode({'poster': poster, **panel})}",
                        "--window-size=1200,630", f"--screenshot={out / f'{name}-share.jpg'}")
                 continue
             params = {**options, "format": "a4" if fmt == "a4" else "square", "export": "1",
@@ -111,6 +116,7 @@ def main():
             render(chrome, post_url, "--window-size=1080,1080", f"--screenshot={site / f'{name}.jpg'}")
             (site / f"{name}-share.jpg").write_bytes((out / f"{name}-share.jpg").read_bytes())
             manifest[name] = {"name": name, "campaign": campaign, "title": share_title, "text": share_text,
+                              "page": options.get("page", "/jazzworkshops/"),
                               "post": f"/assets/campaign/{campaign}/{name}.jpg",
                               "share": f"/assets/campaign/{campaign}/{name}-share.jpg"}
         elif name in manifest:
