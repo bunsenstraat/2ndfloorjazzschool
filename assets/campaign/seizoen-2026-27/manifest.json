@@ -72,15 +72,6 @@
     "share": "/assets/campaign/seizoen-2026-27/akkoorden-leren-horen-share.jpg"
   },
   {
-    "name": "begeleiden-is-ook-spelen",
-    "campaign": "seizoen-2026-27",
-    "title": "Begeleiden is ook spelen — jazzworkshops voor pianisten, gitaristen en bassisten",
-    "text": "Akkoorden, voicings en samen grooven: in de workshop leer je begeleiden en reageren op de solist. €20 per persoon per workshop van 1,5 uur, op maandag, dinsdag of woensdag. Contrabas, drums, piano en versterkers staan klaar: neem alleen je eigen instrument mee.",
-    "page": "/jazzworkshops/",
-    "post": "/assets/campaign/seizoen-2026-27/begeleiden-is-ook-spelen.jpg",
-    "share": "/assets/campaign/seizoen-2026-27/begeleiden-is-ook-spelen-share.jpg"
-  },
-  {
     "name": "swing-mee",
     "campaign": "seizoen-2026-27",
     "title": "Swing mee — jazzworkshops in Amsterdam-West",
@@ -115,5 +106,14 @@
     "page": "/saxofoonles/",
     "post": "/assets/campaign/seizoen-2026-27/vind-je-eigen-geluid.jpg",
     "share": "/assets/campaign/seizoen-2026-27/vind-je-eigen-geluid-share.jpg"
+  },
+  {
+    "name": "creatief-begeleiden",
+    "campaign": "seizoen-2026-27",
+    "title": "Creatief begeleiden — jazzworkshops voor pianisten, gitaristen en bassisten",
+    "text": "Akkoorden, voicings en samen grooven: in de workshop leer je creatief begeleiden en reageren op de solist. €20 per persoon per workshop van 1,5 uur, op maandag, dinsdag of woensdag. Contrabas, drums, piano en versterkers staan klaar: neem alleen je eigen instrument mee.",
+    "page": "/jazzworkshops/",
+    "post": "/assets/campaign/seizoen-2026-27/creatief-begeleiden.jpg",
+    "share": "/assets/campaign/seizoen-2026-27/creatief-begeleiden-share.jpg"
   }
 ]
