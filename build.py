@@ -281,7 +281,7 @@ home = f"""
         <span class="duo blue">{img("studio-saxophone-lesson", "Saxofonist met tenorsaxofoon tijdens een les in de studio", 1200, 800, sizes="(max-width: 44rem) 100vw, 50vw").replace('alt=', 'style="object-position:60% 40%" alt=')}</span>
         <div class="card-body">
           <h3>Saxofoonles</h3>
-          <p>Privéles voor volwassenen bij Eldert, van de allereerste toon tot jazzimprovisatie. Ook een goede opstap naar de workshop.</p>
+          <p>Privéles bij Eldert voor saxofonisten die al een tijd spelen: toon, timing, repertoire en improvisatie. Ook een goede opstap naar de workshop.</p>
           <span class="more">Over de lessen</span>
         </div>
       </a>
@@ -334,12 +334,11 @@ page("/", "Jazzworkshops Amsterdam | 2nd Floor Jazz School",
 
 # ---------------------------------------------------------------- SAXOFOONLES
 sax_faq = [
-    ("Moet ik al noten kunnen lezen?", "Nee. Noten lezen leer je gewoon tijdens de lessen. Veel lesboeken hebben meespeeltracks, zodat je meteen ervaart hoe het is om met een band te spelen."),
-    ("Ik heb nog nooit gespeeld. Ben ik niet te oud om te beginnen?", "Nee. Veel leerlingen beginnen pas op latere leeftijd. De lessen zijn voor volwassenen en worden afgestemd op je niveau en wat je zelf graag wilt spelen."),
-    ("Kan ik na de lessen meedoen aan de jazzworkshop?", "Ja. Saxofoonles is een goede manier om de basis van jazz en improvisatie te leren, zodat je daarna kunt instromen in een van de workshopgroepen."),
-    ("Ik heb nog geen saxofoon. Wat nu?", "Neem gerust contact op voordat je iets koopt. Eldert geeft advies over het kiezen, huren of kopen van een geschikte (tweedehands) saxofoon en de juiste rietjes en mondstukken."),
+    ("Voor wie zijn de lessen?", "Voor volwassen saxofonisten die al een tijd spelen en verder willen: met hun toon, timing, repertoire of improvisatie. Bijvoorbeeld als je in een band, big band of blazerssectie speelt, of een nieuwe impuls zoekt."),
+    ("Kan ik na de lessen meedoen aan de jazzworkshop?", "Ja. In de lessen werk je aan de basis van jazz en improvisatie, zodat je daarna kunt instromen in een van de workshopgroepen."),
     ("Hoe lang duurt een les en wat kost het?", "Lessen duren 40 minuten of een uur, los of als lessenkaart. Neem contact op voor de actuele tarieven en een kennismakingsles."),
-    ("Welke saxofoons kan ik leren spelen?", "Altsaxofoon, tenorsaxofoon en sopraansaxofoon. Veel beginners starten op de alt, maar dat hangt af van je smaak en de muziek die je wilt spelen."),
+    ("Welke saxofoons?", "Altsaxofoon, tenorsaxofoon en sopraansaxofoon."),
+    ("Kan Eldert ook adviseren over materiaal?", "Ja: over een (andere) saxofoon, mondstukken en rieten. Dat maakt vaak een groot verschil voor je geluid."),
     ("Waar vinden de lessen plaats?", f"In de studio van de 2nd Floor Jazz School aan de {STREET} in Amsterdam-West, goed bereikbaar met openbaar vervoer en de fiets."),
 ]
 sax = f"""
@@ -347,23 +346,23 @@ sax = f"""
   <div class="wrap">
     <nav class="crumbs" aria-label="Kruimelpad"><a href="/">Home</a> / Saxofoonles</nav>
     <span class="track" data-n="A1">Privéles in Amsterdam-West</span>
-    <h1>Saxofoonles in Amsterdam voor <em>beginners</em> en <em>gevorderden</em></h1>
-    <p class="lead">Persoonlijke saxofoonles voor volwassenen bij jazzsaxofonist Eldert van Oosten. Of je nu nog nooit een saxofoon hebt vastgehouden of al jaren in een big band speelt: we werken aan wat jij nodig hebt — met plezier in het spelen voorop.</p>
+    <h1>Saxofoonles in Amsterdam voor <em>gevorderden</em></h1>
+    <p class="lead">Persoonlijke saxofoonles bij jazzsaxofonist Eldert van Oosten, voor volwassen saxofonisten die al een tijd spelen. Of je nu in een big band speelt, beter wilt leren improviseren of een nieuwe impuls zoekt: we werken aan wat jij nodig hebt — met plezier in het spelen voorop.</p>
     {contact_buttons()}
   </div>
 </header>
 
-<section id="beginners">
+<section id="voor-wie">
   <div class="wrap split">
     <div>
-      <span class="track" data-n="A2">Beginners</span>
-      <h2>Altijd al saxofoon willen <em>spelen?</em></h2>
-      <p>Kwam het er nooit van? Dan is dit het moment. De lessen zijn zo opgebouwd dat je binnen ongeveer tien lessen de basisprincipes van het saxofoonspelen onder de knie hebt — en meteen je eerste liedjes speelt.</p>
+      <span class="track" data-n="A2">Voor wie</span>
+      <h2>Voor saxofonisten die <em>verder willen</em></h2>
+      <p>Je speelt al een tijd en kent je instrument. Nu wil je een volgende stap zetten: een mooier, vrijer geluid, beter timen, of eindelijk echt leren improviseren.</p>
       <ul class="ticks">
-        <li><b>Basistechniek</b> — hoe houd je een saxofoon vast, hoe blaas je erop, wat is een goede houding en hoe vorm je een toon?</li>
-        <li><b>Noten lezen</b> — dat hoef je nog niet te kunnen; je leert het al spelend.</li>
-        <li><b>Meespelen</b> — advies over lesboeken met meespeeltracks, zodat je hoort hoe het klinkt met een band.</li>
-        <li><b>Uit je hoofd spelen</b> — de basis om later zelf melodieën en je eigen solo’s te bedenken.</li>
+        <li>Je speelt in een band, big band of blazerssectie</li>
+        <li>Je wilt leren improviseren over akkoordenschema’s</li>
+        <li>Je zoekt een vollere, vrijere toon</li>
+        <li>Je wilt jazzstandards uit je hoofd kunnen spelen</li>
       </ul>
     </div>
     <figure class="portrait" style="max-width:none">
@@ -375,7 +374,7 @@ sax = f"""
 <section id="gevorderden" class="section-dark">
   <div class="wrap">
     <div class="section-head">
-      <span class="track" data-n="A3">Gevorderden</span>
+      <span class="track" data-n="A3">Wat je leert</span>
       <h2>Werken aan je <em>eigen geluid</em></h2>
       <p class="lead">Speel je al een aantal jaren en wil je meer weten over toon, timing en improvisatie? Speel je in een band, big band of blazerssectie? Of zoek je gewoon een nieuwe impuls?</p>
     </div>
@@ -396,11 +395,11 @@ sax = f"""
       <h2>Hoe de lessen <em>werken</em></h2>
       <ul class="ticks">
         <li>Lessen van 40 minuten of een uur, los of met een lessenkaart</li>
-        <li>Voor volwassenen, van beginner tot gevorderd</li>
+        <li>Voor volwassen saxofonisten die al een tijd spelen</li>
         <li>Daarna doorstromen naar de <a href="/jazzworkshops/">jazzworkshop</a></li>
         <li>Alt-, tenor- en sopraansaxofoon</li>
         <li>In de studio in Amsterdam-West</li>
-        <li>Advies bij het kopen of huren van een saxofoon</li>
+        <li>Advies over saxofoon, mondstuk en rieten</li>
       </ul>
       <p class="note">Tarieven en beschikbaarheid? Neem contact op — dan plannen we meteen een kennismakingsles.</p>
     </div>
@@ -414,9 +413,9 @@ sax = f"""
 {cta('Plan een <em>kennismakingsles</em>', 'Vertel wat je wilt leren, dan kijken we samen wat bij je past.')}
 """
 page("/saxofoonles/", "Saxofoonles Amsterdam | 2nd Floor Jazz School",
-     "Saxofoonles voor volwassenen in Amsterdam-West. Leer saxofoon spelen of werk aan toon, improvisatie en repertoire bij jazzsaxofonist Eldert van Oosten.",
+     "Saxofoonles voor gevorderde saxofonisten in Amsterdam-West. Werk aan toon, timing, improvisatie en repertoire bij jazzsaxofonist Eldert van Oosten.",
      sax, "/saxofoonles/", ld=[BUSINESS, faq_ld(sax_faq), crumbs_ld([("/", "Home"), ("/saxofoonles/", "Saxofoonles")]),
-     {"@context": "https://schema.org", "@type": "Service", "serviceType": "Saxofoonles", "name": "Saxofoonles Amsterdam", "provider": {"@id": SITE + "/#business"}, "areaServed": "Amsterdam", "audience": {"@type": "Audience", "audienceType": "Volwassenen, beginners en gevorderden"}}],
+     {"@context": "https://schema.org", "@type": "Service", "serviceType": "Saxofoonles", "name": "Saxofoonles Amsterdam", "provider": {"@id": SITE + "/#business"}, "areaServed": "Amsterdam", "audience": {"@type": "Audience", "audienceType": "Volwassen saxofonisten (gevorderd)"}}],
      alt={"nl": "/saxofoonles/", "en": "/en/"})
 
 # ---------------------------------------------------------------- JAZZWORKSHOPS
@@ -631,7 +630,7 @@ en = f"""
         <span class="gear-label">Ready in the studio</span>
         <ul><li>Double bass</li><li>Drums</li><li>Piano</li><li>Amps</li></ul>
       </div>
-      <p class="lead">Just bring your own instrument. Play in a regular group, learn to improvise over chord changes and finish the season on stage. Private saxophone lessons for adults too — in English or Dutch.</p>
+      <p class="lead">Just bring your own instrument. Play in a regular group, learn to improvise over chord changes and finish the season on stage. Private saxophone lessons for experienced players too — in English or Dutch.</p>
       <div>{contact_buttons("en")}</div>
     </div>
     <figure class="hero-figure">
@@ -651,13 +650,13 @@ en = f"""
     </div>
     <div id="lessons">
       <span class="track" data-n="A3">Saxophone lessons</span>
-      <h2>From your first note to your <em>own sound</em></h2>
-      <p>Private lessons for adults on alto, tenor and soprano sax with Eldert. Beginners learn the basics — holding the horn, breathing, tone, reading music. Experienced players work on tone, timing, repertoire, theory and improvisation.</p>
+      <h2>Work on your <em>own sound</em></h2>
+      <p>Private lessons with Eldert for adult saxophonists who already play, on alto, tenor and soprano sax. Work on tone, timing, repertoire, theory and improvisation, or get coaching for your band or big band sax section.</p>
       <ul class="ticks">
         <li>40- or 60-minute private lessons</li>
         <li>Lessons in English or Dutch</li>
         <li>A route into the jazz workshops</li>
-        <li>Advice on buying or renting a saxophone</li>
+        <li>Advice on horns, mouthpieces and reeds</li>
       </ul>
     </div>
   </div>

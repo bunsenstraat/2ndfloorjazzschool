@@ -1,5 +1,41 @@
 [
   {
+    "name": "jazz-improvisatie-workshop",
+    "campaign": "seizoen-2026-27",
+    "title": "Jazz improvisatie workshop Amsterdam-West — 2nd Floor Jazz School",
+    "text": "Leer improviseren in een vaste groep, met contrabas, drums en piano in de studio. Voor volwassen muzikanten met enige jazzervaring, op jouw niveau. €20 per persoon per workshop van 1,5 uur, op maandag, dinsdag of woensdag.",
+    "page": "/jazzworkshops/",
+    "post": "/assets/campaign/seizoen-2026-27/jazz-improvisatie-workshop.jpg",
+    "share": "/assets/campaign/seizoen-2026-27/jazz-improvisatie-workshop-share.jpg"
+  },
+  {
+    "name": "improvisatie-amsterdam-west",
+    "campaign": "seizoen-2026-27",
+    "title": "Jazz improvisatie workshop Amsterdam-West — 2nd Floor Jazz School",
+    "text": "Leer improviseren in een vaste groep, met contrabas, drums en piano in de studio. Voor volwassen muzikanten met enige jazzervaring, op jouw niveau. €20 per persoon per workshop van 1,5 uur, op maandag, dinsdag of woensdag.",
+    "page": "/jazzworkshops/",
+    "post": "/assets/campaign/seizoen-2026-27/improvisatie-amsterdam-west.jpg",
+    "share": "/assets/campaign/seizoen-2026-27/improvisatie-amsterdam-west-share.jpg"
+  },
+  {
+    "name": "jazz-improvisatie-letters",
+    "campaign": "seizoen-2026-27",
+    "title": "Jazz improvisatie workshop Amsterdam-West — 2nd Floor Jazz School",
+    "text": "Leer improviseren in een vaste groep, met contrabas, drums en piano in de studio. Voor volwassen muzikanten met enige jazzervaring, op jouw niveau. €20 per persoon per workshop van 1,5 uur, op maandag, dinsdag of woensdag.",
+    "page": "/jazzworkshops/",
+    "post": "/assets/campaign/seizoen-2026-27/jazz-improvisatie-letters.jpg",
+    "share": "/assets/campaign/seizoen-2026-27/jazz-improvisatie-letters-share.jpg"
+  },
+  {
+    "name": "jazz-improvisatie-foto",
+    "campaign": "seizoen-2026-27",
+    "title": "Jazz improvisatie workshop Amsterdam-West — 2nd Floor Jazz School",
+    "text": "Leer improviseren in een vaste groep, met contrabas, drums en piano in de studio. Voor volwassen muzikanten met enige jazzervaring, op jouw niveau. €20 per persoon per workshop van 1,5 uur, op maandag, dinsdag of woensdag.",
+    "page": "/jazzworkshops/",
+    "post": "/assets/campaign/seizoen-2026-27/jazz-improvisatie-foto.jpg",
+    "share": "/assets/campaign/seizoen-2026-27/jazz-improvisatie-foto-share.jpg"
+  },
+  {
     "name": "improviseren",
     "campaign": "seizoen-2026-27",
     "title": "Leer improviseren over akkoordenschema’s — jazzworkshops in Amsterdam",
@@ -16,15 +52,6 @@
     "page": "/jazzworkshops/",
     "post": "/assets/campaign/seizoen-2026-27/samen-spelen.jpg",
     "share": "/assets/campaign/seizoen-2026-27/samen-spelen-share.jpg"
-  },
-  {
-    "name": "samenspel",
-    "campaign": "seizoen-2026-27",
-    "title": "Samenspel: luisteren en reageren — jazzworkshops in Amsterdam",
-    "text": "Jazzworkshops voor volwassenen met enige jazzervaring in Amsterdam-West. €20 per persoon per workshop van 1,5 uur, op maandag, dinsdag of woensdag. Contrabas, drums, piano en versterkers staan klaar: neem alleen je eigen instrument mee.",
-    "page": "/jazzworkshops/",
-    "post": "/assets/campaign/seizoen-2026-27/samenspel.jpg",
-    "share": "/assets/campaign/seizoen-2026-27/samenspel-share.jpg"
   },
   {
     "name": "in-je-eigen-tempo",
@@ -54,6 +81,15 @@
     "share": "/assets/campaign/seizoen-2026-27/speel-op-jouw-niveau-share.jpg"
   },
   {
+    "name": "samenspel",
+    "campaign": "seizoen-2026-27",
+    "title": "Samenspel: luisteren en reageren — jazzworkshops in Amsterdam",
+    "text": "Jazzworkshops voor volwassenen met enige jazzervaring in Amsterdam-West. €20 per persoon per workshop van 1,5 uur, op maandag, dinsdag of woensdag. Contrabas, drums, piano en versterkers staan klaar: neem alleen je eigen instrument mee.",
+    "page": "/jazzworkshops/",
+    "post": "/assets/campaign/seizoen-2026-27/samenspel.jpg",
+    "share": "/assets/campaign/seizoen-2026-27/samenspel-share.jpg"
+  },
+  {
     "name": "de-bas-loopt-al",
     "campaign": "seizoen-2026-27",
     "title": "De bas loopt al — speel mee in een jazzworkshop in Amsterdam-West",
@@ -72,10 +108,19 @@
     "share": "/assets/campaign/seizoen-2026-27/akkoorden-leren-horen-share.jpg"
   },
   {
+    "name": "creatief-begeleiden",
+    "campaign": "seizoen-2026-27",
+    "title": "Creatief begeleiden — jazzworkshops voor pianisten, gitaristen en bassisten",
+    "text": "Akkoorden, voicings en samen grooven: in de workshop leer je creatief begeleiden en reageren op de solist. €20 per persoon per workshop van 1,5 uur, op maandag, dinsdag of woensdag. Contrabas, drums, piano en versterkers staan klaar: neem alleen je eigen instrument mee.",
+    "page": "/jazzworkshops/",
+    "post": "/assets/campaign/seizoen-2026-27/creatief-begeleiden.jpg",
+    "share": "/assets/campaign/seizoen-2026-27/creatief-begeleiden-share.jpg"
+  },
+  {
     "name": "swing-mee",
     "campaign": "seizoen-2026-27",
     "title": "Swing mee — jazzworkshops in Amsterdam-West",
-    "text": "Drums, contrabas, piano en versterkers staan klaar in de oefenruimte op de tweede. Neem je instrument mee en swing mee. €20 per persoon per workshop van 1,5 uur, op maandag, dinsdag of woensdag.",
+    "text": "Drums, contrabas, piano en versterkers staan klaar in de oefenruimte. Neem je instrument mee en swing mee. €20 per persoon per workshop van 1,5 uur, op maandag, dinsdag of woensdag.",
     "page": "/jazzworkshops/",
     "post": "/assets/campaign/seizoen-2026-27/swing-mee.jpg",
     "share": "/assets/campaign/seizoen-2026-27/swing-mee-share.jpg"
@@ -102,18 +147,9 @@
     "name": "vind-je-eigen-geluid",
     "campaign": "seizoen-2026-27",
     "title": "Vind je eigen geluid — saxofoonles in Amsterdam-West",
-    "text": "Persoonlijke saxofoonles voor volwassenen, van de allereerste toon tot jazzimprovisatie. Werk aan je toon, techniek en repertoire bij jazzsaxofonist Eldert van Oosten.",
+    "text": "Persoonlijke saxofoonles voor saxofonisten die al een tijd spelen. Werk aan je toon, timing, repertoire en improvisatie bij jazzsaxofonist Eldert van Oosten in Amsterdam-West.",
     "page": "/saxofoonles/",
     "post": "/assets/campaign/seizoen-2026-27/vind-je-eigen-geluid.jpg",
     "share": "/assets/campaign/seizoen-2026-27/vind-je-eigen-geluid-share.jpg"
-  },
-  {
-    "name": "creatief-begeleiden",
-    "campaign": "seizoen-2026-27",
-    "title": "Creatief begeleiden — jazzworkshops voor pianisten, gitaristen en bassisten",
-    "text": "Akkoorden, voicings en samen grooven: in de workshop leer je creatief begeleiden en reageren op de solist. €20 per persoon per workshop van 1,5 uur, op maandag, dinsdag of woensdag. Contrabas, drums, piano en versterkers staan klaar: neem alleen je eigen instrument mee.",
-    "page": "/jazzworkshops/",
-    "post": "/assets/campaign/seizoen-2026-27/creatief-begeleiden.jpg",
-    "share": "/assets/campaign/seizoen-2026-27/creatief-begeleiden-share.jpg"
   }
 ]

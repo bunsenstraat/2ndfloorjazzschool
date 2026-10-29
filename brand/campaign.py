@@ -124,7 +124,9 @@ def main():
         print(f"  {name}: {', '.join(formats)}{'  → website' if publish else ''}")
     if manifest or manifest_path.exists():
         site.mkdir(parents=True, exist_ok=True)
-        manifest_path.write_text(json.dumps(list(manifest.values()), ensure_ascii=False, indent=2) + "\n")
+        order = [r.get("name", "").strip() for r in read_rows(csv_path)]  # /delen/ follows the order of the list
+        entries = sorted(manifest.values(), key=lambda e: order.index(e["name"]) if e["name"] in order else len(order))
+        manifest_path.write_text(json.dumps(entries, ensure_ascii=False, indent=2) + "\n")
     print(f"done → {out.relative_to(HERE)}/")
 
 
