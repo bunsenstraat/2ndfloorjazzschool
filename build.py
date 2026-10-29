@@ -1,4 +1,5 @@
-import json, os, sys
+import glob, html, json, os, sys
+from urllib.parse import quote
 
 OUT = sys.argv[1]
 SITE = "https://www.2ndfloorjazzschool.nl"  # change here if the domain is served without www
@@ -10,13 +11,17 @@ STREET = "Jacob van Lennepstraat 157"
 POSTCODE = "1053 HW"
 CITY = "Amsterdam"
 SCHOOL = "2nd Floor Jazz School"
-ASSET_V = "12"  # bump after changing style.css or main.js so browsers fetch the new file
+ASSET_V = "14"  # bump after changing style.css or main.js so browsers fetch the new file
 MARK = '<svg class="mark" width="36" height="36" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="6" fill="#17161b"/><rect x="7" y="8" width="18" height="3.2" rx="1.6" fill="#e2b765"/><rect x="7" y="14.4" width="18" height="3.2" rx="1.6" fill="#f5f0e6" fill-opacity=".5"/><rect x="7" y="20.8" width="18" height="3.2" rx="1.6" fill="#f5f0e6" fill-opacity=".5"/></svg>'
 
 ICON = {
     "phone": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>',
     "wa": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 21l1.65-3.8A9 9 0 1 1 7.8 20.3L3 21"/><path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1"/></svg>',
     "mail": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>',
+    "fb": '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 8h3V4h-3c-2.8 0-4.5 1.8-4.5 4.6V11H7v4h2.5v7h4v-7h3l.5-4h-3.5V8.8c0-.5.3-.8.5-.8z"/></svg>',
+    "share": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 15V3m0 0L7.5 7.5M12 3l4.5 4.5"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg>',
+    "download": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3v12m0 0-4.5-4.5M12 15l4.5-4.5"/><path d="M4 19h16"/></svg>',
+    "link": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1 1"/><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1-1"/></svg>',
     "play": '<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M7 4v16l13-8z"/></svg>',
 }
 
@@ -72,7 +77,26 @@ def crumbs_ld(trail):
             "itemListElement": [{"@type": "ListItem", "position": i + 1, "name": n, "item": SITE + u} for i, (u, n) in enumerate(trail)]}
 
 
-def page(path, title, desc, body, current, lang="nl", ld=(), alt=None):
+def share_buttons(url, text, image=None, small=False, lang="nl"):
+    """Facebook, WhatsApp and (on phones) the system share sheet, which can attach the poster image."""
+    T = (lambda nl, en: en) if lang == "en" else (lambda nl, en: nl)
+    fb = "https://www.facebook.com/sharer/sharer.php?u=" + quote(url, safe="")
+    wa = "https://wa.me/?text=" + quote(f"{text}\n{url}", safe="")
+    cls = "share small" if small else "share"
+    text = html.escape(text, quote=True)
+    native = (f'<button type="button" class="btn btn-native" data-share-url="{url}" data-share-text="{text}"'
+              + (f' data-share-image="{image}"' if image else "") + f' hidden>{ICON["share"]}{T("Delen…", "Share…")}</button>')
+    parts = [native,
+             f'<a class="btn btn-fb" href="{fb}" target="_blank" rel="noopener">{ICON["fb"]}Facebook</a>',
+             f'<a class="btn btn-wa" href="{wa}" target="_blank" rel="noopener">{ICON["wa"]}WhatsApp</a>']
+    if image:
+        parts.append(f'<a class="btn btn-ghost" href="{image}" download>{ICON["download"]}{T("Afbeelding opslaan", "Save image")}</a>')
+    if not small:
+        parts.append(f'<button type="button" class="btn btn-ghost" data-copy="{url}">{ICON["link"]}{T("Link kopiëren", "Copy link")}</button>')
+    return f'<div class="{cls}">' + "".join(parts) + "</div>"
+
+
+def page(path, title, desc, body, current, lang="nl", ld=(), alt=None, og_image="/assets/img/og-image.jpg", og_title=None, og_desc=None, noindex=False):
     nav = NAV_EN if lang == "en" else NAV_NL
     items = "".join(f'<li><a href="{u}"{" aria-current=\"page\"" if u == current else ""}>{n}</a></li>' for u, n in nav)
     if lang == "en":
@@ -93,17 +117,18 @@ def page(path, title, desc, body, current, lang="nl", ld=(), alt=None):
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{title}</title>
 <meta name="description" content="{desc}">
-<link rel="canonical" href="{SITE}{path}">
+{'<meta name="robots" content="noindex">' + chr(10) if noindex else ''}<link rel="canonical" href="{SITE}{path}">
 {hreflang}<meta name="theme-color" content="#17161b">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="{T('nl_NL', 'en_GB')}">
 <meta property="og:site_name" content="2nd Floor Jazz School">
-<meta property="og:title" content="{title}">
-<meta property="og:description" content="{desc}">
+<meta property="og:title" content="{og_title or title}">
+<meta property="og:description" content="{og_desc or desc}">
 <meta property="og:url" content="{SITE}{path}">
-<meta property="og:image" content="{SITE}/assets/img/og-image.jpg">
+<meta property="og:image" content="{SITE}{og_image}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{og_title or title}">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -140,6 +165,11 @@ def page(path, title, desc, body, current, lang="nl", ld=(), alt=None):
       <address>{STREET}<br>{POSTCODE} {CITY}<br>
       <a href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a><br>
       <a href="mailto:{EMAIL}">{EMAIL}</a></address>
+    </div>
+    <div class="footer-share">
+      <h2>{T('Deel deze pagina', 'Share this page')}</h2>
+      {share_buttons(SITE + path, og_title or title, small=True, lang=lang)}
+      <p><a href="/delen/">{T('Alle posters om te delen →', 'All posters to share →')}</a></p>
     </div>
     <p class="legal">© <span data-year>2026</span> 2nd Floor Jazz School · {T('Jazzworkshops Amsterdam · Saxofoonles Amsterdam', 'Jazz workshops Amsterdam · Saxophone lessons Amsterdam')}</p>
   </div>
@@ -650,6 +680,79 @@ en = f"""
 page("/en/", "Jazz Workshops Amsterdam | 2nd Floor Jazz School",
      "Jazz workshops for adults in Amsterdam-West. Studio with double bass, drums, piano and amps. Ensemble playing and improvisation, led by Eldert van Oosten.",
      en, "/en/", lang="en", ld=[BUSINESS, PERSON], alt={"nl": "/", "en": "/en/"})
+
+# ---------------------------------------------------------------- DELEN (share pages)
+# Published campaign posters (see brand/campaign.py) each get a page that Facebook and WhatsApp
+# turn into a ready-made post: poster preview image, title and description. /delen/ lists them all
+# with big share buttons, so sharing is one tap.
+posters = []
+for mf in sorted(glob.glob(os.path.join(OUT, "assets/campaign/*/manifest.json")), reverse=True):
+    posters += json.load(open(mf, encoding="utf-8"))
+
+WORKSHOP_TEXT = ("Jazzworkshops voor volwassenen met enige jazzervaring in Amsterdam-West. €20 per persoon per workshop van 1,5 uur, "
+                 "op maandag, dinsdag of woensdag. Contrabas, drums, piano en versterkers staan klaar: neem alleen je eigen instrument mee.")
+
+for ps in posters:
+    url = f"{SITE}/delen/{ps['name']}/"
+    title = ps["title"] or "Jazzworkshops in Amsterdam-West — 2nd Floor Jazz School"
+    text = ps["text"] or WORKSHOP_TEXT
+    body = f"""
+<section class="hero poster-page">
+  <div class="wrap">
+    <figure class="poster-figure"><img src="{ps['post']}" width="1080" height="1080" alt="Poster: {title}" fetchpriority="high"></figure>
+    <div>
+      <span class="track" data-n="2nd">Jazzworkshops · Amsterdam-West</span>
+      <h1>Speel mee in een <em>jazzgroep</em></h1>
+      <p class="lead">{text}</p>
+      {practical()}
+      {contact_buttons()}
+      <p style="margin-top:1.5rem"><a href="/jazzworkshops/">Alles over de jazzworkshops →</a></p>
+    </div>
+  </div>
+</section>
+<section class="section-alt">
+  <div class="wrap">
+    <span class="track" data-n="♪">Delen</span>
+    <h2>Ken je iemand die <em>mee wil spelen?</em></h2>
+    {share_buttons(url, title, image=ps['post'])}
+  </div>
+</section>
+"""
+    page(f"/delen/{ps['name']}/", f"{title} | 2nd Floor Jazz School", text, body, "",
+         og_image=ps["share"], og_title=title, og_desc=text, noindex=True,
+         ld=[crumbs_ld([("/", "Home"), ("/delen/", "Delen"), (f"/delen/{ps['name']}/", ps['name'])])])
+
+cards = "".join(f"""
+    <article class="share-card">
+      <img src="{ps['post']}" width="1080" height="1080" alt="Poster: {ps['title']}" loading="lazy">
+      <div class="share-card-body">
+        <h2>{ps['title']}</h2>
+        {share_buttons(f"{SITE}/delen/{ps['name']}/", ps['title'], image=ps['post'])}
+      </div>
+    </article>""" for ps in posters)
+hub = f"""
+<header class="page-head">
+  <div class="wrap">
+    <span class="track" data-n="♪">Delen</span>
+    <h1>Posters om te <em>delen</em></h1>
+    <p class="lead">Kies een poster en tik op <b>Facebook</b> of <b>WhatsApp</b>. Het bericht staat dan al klaar, met de poster en alle informatie over de workshops. Alleen nog op <b>Plaatsen</b> of <b>Verstuur</b> drukken.</p>
+    <p class="note">Op je telefoon zie je ook de knop <b>Delen…</b>: die opent het gewone deelmenu, met de poster als foto. Kies daar Facebook, WhatsApp of Instagram.</p>
+  </div>
+</header>
+<section>
+  <div class="wrap share-grid">{cards}
+    <article class="share-card">
+      <img src="/assets/img/og-image.jpg" width="1200" height="630" alt="De website van 2nd Floor Jazz School" loading="lazy" style="aspect-ratio:1200/630">
+      <div class="share-card-body">
+        <h2>De website: jazzworkshops in Amsterdam-West</h2>
+        {share_buttons(f"{SITE}/jazzworkshops/", "Jazzworkshops in Amsterdam-West — 2nd Floor Jazz School")}
+      </div>
+    </article>
+  </div>
+</section>
+"""
+page("/delen/", "Posters delen | 2nd Floor Jazz School", "Posters van 2nd Floor Jazz School om te delen op Facebook en WhatsApp.",
+     hub, "", noindex=True)
 
 # ---------------------------------------------------------------- 404
 nf = f"""

@@ -70,3 +70,19 @@ Per poster: `exports/<campagne>/<naam>-post.png` (1080×1080), `<naam>-a4.png` e
 **QR-code:** elke A4-flyer krijgt rechtsonder een QR-code naar de site (standaard `/jazzworkshops/`, of de pagina in kolom `page`).
 De link bevat de campagne- en posternaam (`utm_campaign`, `utm_content`), zodat je in de statistieken kunt zien welke flyer bezoekers oplevert.
 `qr=none` laat de code weg.
+
+## Posters op de website zetten (om te delen)
+Zet in de campagnelijst `publish` op `ja` en vul `share_title` en `share_text` in. Dat is de titel en tekst die
+Facebook en WhatsApp bij de poster laten zien. Daarna:
+
+```
+python3 brand/campaign.py brand/campaigns/seizoen-2026-27.csv
+python3 build.py .
+```
+
+Elke gepubliceerde poster krijgt een eigen pagina (`/delen/<naam>/`) met een brede voorbeeldafbeelding (poster + prijs,
+duur, dagen en instrumenten) die Facebook en WhatsApp automatisch tonen. Op **`/delen/`** staan alle posters met grote
+knoppen: Facebook, WhatsApp, afbeelding opslaan en, op de telefoon, **Delen…** (gewone deelmenu, met de poster als foto).
+
+Facebook onthoudt een voorbeeld een tijd. Na het aanpassen van een poster: plak de link in de
+[Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/) en klik op *Scrape Again*.

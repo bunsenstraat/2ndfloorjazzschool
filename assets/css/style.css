@@ -341,3 +341,32 @@ a.contact-tile:hover { transform: translate(-4px, -4px); box-shadow: var(--shado
 .section-alt .practical li:not(.hot) { background: var(--paper); }
 @media (max-width: 34rem) { .practical { grid-template-columns: 1fr 1fr; } .practical li:last-child { grid-column: 1 / -1; } }
 .card-meta { font: 700 .74rem/1.4 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--brass-deep); }
+
+/* ---------- sharing ---------- */
+.share { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1.25rem; }
+.share .btn { padding: 1rem 1.3rem; font-size: .9rem; }
+.btn-fb { background: #1877f2; border-color: #1877f2; color: #fff; }
+.btn-wa { background: #25d366; border-color: #1da851; color: var(--ink); }
+.btn-native { background: var(--orange); color: var(--ink); }
+.btn-fb:hover, .btn-wa:hover, .btn-native:hover { color: inherit; filter: brightness(1.05); }
+.btn-fb:hover { color: #fff; }
+.share.small { margin-top: .25rem; gap: .5rem; }
+.share.small .btn { padding: .6rem .8rem; font-size: .72rem; border-color: rgba(239,230,210,.4); }
+.site-footer .btn-ghost { color: var(--paper); border-color: rgba(239,230,210,.4); }
+.footer-share { grid-column: 1 / -1; border-top: 1px solid rgba(239,230,210,.18); padding-top: 1.5rem; }
+.footer-share p { margin: .9rem 0 0; font-size: .9rem; }
+
+.poster-page .wrap { grid-template-columns: .95fr 1.05fr; }
+.poster-figure { margin: 0; border: 2px solid var(--ink); box-shadow: var(--shadow); }
+.poster-figure img { width: 100%; }
+.poster-page h1 { font-size: clamp(2.8rem, 7vw, 5.2rem); }
+@media (max-width: 52rem) { .poster-page .wrap { grid-template-columns: 1fr; } }
+
+.share-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr)); gap: 2rem; }
+.share-card { border: 2px solid var(--ink); background: var(--paper); display: flex; flex-direction: column; }
+.share-card img { width: 100%; aspect-ratio: 1; object-fit: cover; border-bottom: 2px solid var(--ink); }
+.share-card-body { padding: 1.25rem 1.25rem 1.4rem; }
+.share-card h2 { font-size: 1.7rem; line-height: .95; margin-bottom: .25rem; }
+.share-card .share .btn { flex: 1 1 calc(50% - .7rem); }
+.share-card .share .btn-native { flex-basis: 100%; font-size: 1rem; padding: 1.15rem; }
+.btn[hidden] { display: none; }

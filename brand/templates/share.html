@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<title>Share image — 2nd Floor Jazz School</title>
+<!-- Wide 1200×630 image for Facebook / WhatsApp link previews:
+     the square poster on the left, the workshop essentials on the right.
+     Options: ?poster=<image url>&head=Jazz-|workshops&sub=Amsterdam-West&facts=…|…&gear=…&url=… -->
+<style>
+@font-face { font-family: "Archivo"; src: url("../fonts/archivo-normal-100-900.woff2") format("woff2"); font-weight: 100 900; font-stretch: 62% 125%; }
+@font-face { font-family: "Instrument Serif"; src: url("../../assets/fonts/instrument-serif-italic.woff2") format("woff2"); font-style: italic; }
+@font-face { font-family: "Hanken Grotesk"; src: url("../../assets/fonts/hanken-grotesk.woff2") format("woff2"); font-weight: 400 700; }
+:root { --paper: #efe6d2; --ink: #141317; --orange: #de6b1f; --yellow: #e6b532; }
+* { box-sizing: border-box; }
+html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; background: var(--ink); }
+.wrap { display: grid; grid-template-columns: 630px 570px; height: 630px; }
+.poster { width: 630px; height: 630px; object-fit: cover; display: block; }
+.panel { position: relative; padding: 46px 48px 40px 52px; color: var(--paper); display: flex; flex-direction: column; }
+.panel::after { content: ""; position: absolute; inset: 0; pointer-events: none; mix-blend-mode: screen; opacity: .07;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+.logo { width: 250px; display: block; margin-bottom: 34px; }
+.head { font: 900 92px/.82 "Archivo", "Arial Narrow", sans-serif; font-stretch: 62%; text-transform: uppercase; letter-spacing: -.01em; margin: 0; }
+.head span { display: block; }
+.head span:nth-child(2) { color: var(--orange); margin-left: 60px; }
+.sub { font: italic 400 38px/1 "Instrument Serif", serif; color: var(--yellow); margin: 12px 0 0 4px; }
+.facts { display: flex; gap: 10px; margin-top: auto; }
+.facts span { border: 2px solid var(--paper); padding: 10px 12px 9px; font: 900 30px/1 "Archivo", sans-serif; font-stretch: 62%; text-transform: uppercase; white-space: nowrap; }
+.facts span:first-child { background: var(--orange); border-color: var(--orange); color: var(--ink); }
+.gear { font: 700 13px/1.4 "Hanken Grotesk", sans-serif; letter-spacing: .12em; text-transform: uppercase; color: #d4ccbd; margin-top: 16px; }
+.url { font: 700 14px/1 "Hanken Grotesk", sans-serif; letter-spacing: .16em; text-transform: uppercase; color: var(--yellow); margin-top: 14px; padding-top: 14px; border-top: 2px solid rgba(239,230,210,.25); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <img class="poster" id="poster" alt="">
+  <div class="panel">
+    <img class="logo" src="logo-inverse.svg" alt="2nd Floor Jazz School">
+    <h1 class="head" id="head"></h1>
+    <div class="sub" id="sub"></div>
+    <div class="facts" id="facts"></div>
+    <div class="gear" id="gear"></div>
+    <div class="url" id="url"></div>
+  </div>
+</div>
+<script>
+const q = new URLSearchParams(location.search);
+const get = (k, d) => q.get(k) ?? d;
+document.getElementById('poster').src = get('poster', '');
+document.getElementById('head').innerHTML = get('head', 'Jazz-|workshops').split('|').map(t => `<span>${t}</span>`).join('');
+document.getElementById('sub').textContent = get('sub', 'in Amsterdam-West');
+document.getElementById('facts').innerHTML = get('facts', '€20 p.p.|1,5 uur|ma · di · wo').split('|').map(t => `<span>${t}</span>`).join('');
+document.getElementById('gear').textContent = get('gear', 'Contrabas · drums · piano · versterkers staan klaar');
+document.getElementById('url').textContent = get('url', '2ndfloorjazzschool.nl');
+</script>
+</body>
+</html>

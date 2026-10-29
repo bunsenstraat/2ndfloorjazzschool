@@ -1,7 +1,7 @@
-name,template,formats,t1,t2,w,side,info,bg,accent,size,bars,page,qrlabel
-improviseren,gebroken-woord,,,,Im-pro-vi-se-ren,over|akkoorden-|schema’s,Jazzworkshop|voor volwassenen,,,,,,
-samen-spelen,ritme,,Samen,spelen,,,Vaste groepen|alle instrumenten,yellow,,,,,
-breng-je-instrument,ritme,,Breng je,instrument,,,Contrabas · drums|piano · versterkers|staan klaar,blue,,,"30,45,62,100,78,88,52,70,40,58",,
-samenspel,gebroken-woord,,,,Sa-men-spel,luisteren|en|reageren,Jazzworkshop|voor volwassenen,,green,,,,
-walkin-woord,gebroken-woord,,,,Walk-in’,één sessie|zonder|publiek,Walkin’ Workshop|losse sessie,,blue,,,/jazzworkshops/,Aanmelden|per sessie
-walkin-ritme,ritme,,Walkin’,workshop,,,Eén sessie · geen publiek|meld je aan per keer,orange,,,,/jazzworkshops/,Aanmelden|per sessie
+name,template,formats,publish,share_title,share_text,t1,t2,w,side,info,bg,accent,size,bars,page,qrlabel
+improviseren,gebroken-woord,,ja,Leer improviseren over akkoordenschema’s — jazzworkshops in Amsterdam,"Jazzworkshops voor volwassenen met enige jazzervaring in Amsterdam-West. €20 per persoon per workshop van 1,5 uur, op maandag, dinsdag of woensdag. Contrabas, drums, piano en versterkers staan klaar: neem alleen je eigen instrument mee.",,,Im-pro-vi-se-ren,over|akkoorden-|schema’s,Jazzworkshop|voor volwassenen,,,,,,
+samen-spelen,ritme,,ja,Samen spelen in een jazzgroep — 2nd Floor Jazz School,"Jazzworkshops voor volwassenen met enige jazzervaring in Amsterdam-West. €20 per persoon per workshop van 1,5 uur, op maandag, dinsdag of woensdag. Contrabas, drums, piano en versterkers staan klaar: neem alleen je eigen instrument mee.",Samen,spelen,,,Vaste groepen|alle instrumenten,yellow,,,,,
+breng-je-instrument,ritme,,ja,"Breng je instrument, de rest staat klaar — jazzworkshops Amsterdam-West","Jazzworkshops voor volwassenen met enige jazzervaring in Amsterdam-West. €20 per persoon per workshop van 1,5 uur, op maandag, dinsdag of woensdag. Contrabas, drums, piano en versterkers staan klaar: neem alleen je eigen instrument mee.",Breng je,instrument,,,Contrabas · drums|piano · versterkers|staan klaar,blue,,,"30,45,62,100,78,88,52,70,40,58",,
+samenspel,gebroken-woord,,ja,Samenspel: luisteren en reageren — jazzworkshops in Amsterdam,"Jazzworkshops voor volwassenen met enige jazzervaring in Amsterdam-West. €20 per persoon per workshop van 1,5 uur, op maandag, dinsdag of woensdag. Contrabas, drums, piano en versterkers staan klaar: neem alleen je eigen instrument mee.",,,Sa-men-spel,luisteren|en|reageren,Jazzworkshop|voor volwassenen,,green,,,,
+walkin-woord,gebroken-woord,,nee,,,,,Walk-in’,één sessie|zonder|publiek,Walkin’ Workshop|losse sessie,,blue,,,/jazzworkshops/,Aanmelden|per sessie
+walkin-ritme,ritme,,nee,,,Walkin’,workshop,,,Eén sessie · geen publiek|meld je aan per keer,orange,,,,/jazzworkshops/,Aanmelden|per sessie
