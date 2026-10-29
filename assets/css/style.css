@@ -144,7 +144,7 @@ p { margin: 0 0 1.1em; max-width: 62ch; }
 .broken .in { font: italic 400 .36em/1 var(--serif); text-transform: none; letter-spacing: 0; margin: .25em 0 0 .1em; color: var(--ink); }
 .kicker { font: 700 .78rem/1.5 var(--sans); letter-spacing: .2em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 1.5rem; }
 .hero-figure { position: relative; margin: 0; background: var(--yellow); border: 2px solid var(--ink); box-shadow: var(--shadow); }
-.hero-figure img { width: 100%; aspect-ratio: 4/5; object-fit: cover; filter: grayscale(1) contrast(1.3) brightness(1.08); mix-blend-mode: multiply; }
+.hero-figure img { width: 100%; aspect-ratio: 4/5; object-fit: cover; }
 .hero-figure figcaption { position: absolute; left: -2px; bottom: 1.25rem; background: var(--ink); color: var(--paper); padding: .65rem .9rem; font: 700 .72rem/1.4 var(--sans); letter-spacing: .14em; text-transform: uppercase; max-width: 80%; }
 .hero-figure figcaption b { color: var(--yellow); }
 
@@ -180,12 +180,9 @@ section { padding: clamp(3.5rem, 8vw, 6.5rem) 0; }
 .split { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 6vw, 5rem); align-items: start; }
 @media (max-width: 52rem) { .split { grid-template-columns: 1fr; } }
 
-/* duotone photos: grey image multiplied over a flat colour; full colour on hover */
-.duo { display: block; background: var(--orange); overflow: hidden; }
-.duo img { filter: grayscale(1) contrast(1.3) brightness(1.08); mix-blend-mode: multiply; transition: filter .4s, transform .6s; }
-.duo.blue { background: var(--blue); }
-.duo.yellow { background: var(--yellow); }
-.duo.green { background: var(--green); }
+/* photo frame on cards */
+.duo { display: block; overflow: hidden; }
+.duo img { transition: transform .6s; }
 
 /* service "side A / side B" cards */
 .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.75rem; }
@@ -196,7 +193,7 @@ section { padding: clamp(3.5rem, 8vw, 6.5rem) 0; }
 .card:hover { transform: translate(-4px, -4px); box-shadow: var(--shadow); color: inherit; }
 .card .duo { border-bottom: 2px solid var(--ink); }
 .card img { aspect-ratio: 3/2; object-fit: cover; width: 100%; }
-.card:hover .duo img { filter: none; mix-blend-mode: normal; }
+.card:hover .duo img { transform: scale(1.03); }
 .card-body { padding: 1.5rem 1.5rem 1.6rem; display: flex; flex-direction: column; flex: 1; }
 .card-body h3 { font-size: clamp(2rem, 4vw, 2.8rem); }
 .card-body p { color: var(--ink-soft); }
@@ -224,14 +221,11 @@ section { padding: clamp(3.5rem, 8vw, 6.5rem) 0; }
 .pull::before { content: "“"; color: var(--orange); }
 .pull::after { content: "”"; color: var(--orange); }
 
-/* gallery: alternating duotone colours */
+/* gallery */
 .gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: .9rem; }
-.gallery figure { margin: 0; overflow: hidden; background: var(--orange); border: 2px solid var(--ink); }
-.gallery figure:nth-child(4n+2) { background: var(--blue); }
-.gallery figure:nth-child(4n+3) { background: var(--yellow); }
-.gallery figure:nth-child(4n+4) { background: var(--green); }
-.gallery img { width: 100%; height: 100%; aspect-ratio: 3/4; object-fit: cover; filter: grayscale(1) contrast(1.3) brightness(1.08); mix-blend-mode: multiply; transition: filter .4s, transform .6s; }
-.gallery figure:hover img { filter: none; mix-blend-mode: normal; transform: scale(1.03); }
+.gallery figure { margin: 0; overflow: hidden; border: 2px solid var(--ink); }
+.gallery img { width: 100%; height: 100%; aspect-ratio: 3/4; object-fit: cover; transition: transform .6s; }
+.gallery figure:hover img { transform: scale(1.03); }
 .gallery .wide { grid-column: span 2; }
 .gallery .wide img { aspect-ratio: auto; }
 .section-dark .gallery figure { border-color: var(--paper); }
@@ -240,7 +234,6 @@ section { padding: clamp(3.5rem, 8vw, 6.5rem) 0; }
 /* portrait framed */
 .portrait { margin: 0; position: relative; max-width: 24rem; }
 .portrait img { width: 100%; border: 2px solid var(--ink); box-shadow: var(--shadow); }
-.portrait img[width="240"] { max-width: 18rem; filter: grayscale(1) contrast(1.1); }
 .portrait figcaption { font: 700 .72rem/1.4 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); margin-top: 1.1rem; }
 
 /* tracks (music) */

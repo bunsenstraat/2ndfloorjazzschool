@@ -4,3 +4,5 @@ __pycache__/
 *.zone
 brand/sketches/
 brand/exports/
+# original photos (large); the site uses the optimised studio-*.webp copies
+assets/img/2026-practice-room/

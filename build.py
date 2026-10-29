@@ -10,7 +10,7 @@ STREET = "Jacob van Lennepstraat 157"
 POSTCODE = "1053 HW"
 CITY = "Amsterdam"
 SCHOOL = "2nd Floor Jazz School"
-ASSET_V = "10"  # bump after changing style.css or main.js so browsers fetch the new file
+ASSET_V = "12"  # bump after changing style.css or main.js so browsers fetch the new file
 MARK = '<svg class="mark" width="36" height="36" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="6" fill="#17161b"/><rect x="7" y="8" width="18" height="3.2" rx="1.6" fill="#e2b765"/><rect x="7" y="14.4" width="18" height="3.2" rx="1.6" fill="#f5f0e6" fill-opacity=".5"/><rect x="7" y="20.8" width="18" height="3.2" rx="1.6" fill="#f5f0e6" fill-opacity=".5"/></svg>'
 
 ICON = {
@@ -50,7 +50,7 @@ PERSON = {
     "name": "Eldert van Oosten",
     "jobTitle": ["Jazzsaxofonist", "Docent en coach, 2nd Floor Jazz School"],
     "url": SITE + "/docent/",
-    "image": SITE + "/assets/img/eldert-portret.webp",
+    "image": SITE + "/assets/img/studio-eldert-at-the-piano.webp",
     "alumniOf": {"@type": "CollegeOrUniversity", "name": "Sweelinck Conservatorium Amsterdam"},
     "knowsAbout": ["Saxofoon", "Jazz", "Improvisatie", "Jazzstandards", "Samenspel"],
     "worksFor": {"@id": SITE + "/#business"},
@@ -222,8 +222,8 @@ home = f"""
       <div>{contact_buttons()}</div>
     </div>
     <figure class="hero-figure">
-      {img("workshop-2", "Docent Eldert van Oosten speelt tenorsaxofoon samen met een deelnemer tijdens een jazzworkshop", 900, 1200, eager=True, sizes="(max-width: 52rem) 100vw, 40vw")}
-      <figcaption><b>Live</b> — samen spelen op de einduitvoering van de workshop</figcaption>
+      {img("studio-double-bass-guitar-together", "Gitarist en contrabassist spelen samen in de oefenruimte van 2nd Floor Jazz School", 1200, 799, eager=True, sizes="(max-width: 52rem) 100vw, 40vw").replace('alt=', 'style="object-position:30% 50%" alt=')}
+      <figcaption><b>Oefenruimte</b> — gitaar en contrabas, samen spelen</figcaption>
     </figure>
   </div>
 </section>
@@ -238,7 +238,7 @@ home = f"""
     <div class="cards">
       <a class="card" href="/jazzworkshops/">
         <span class="side">Kant A</span>
-        <span class="duo">{img("workshop-9", "Groepsfoto van de deelnemers aan de jazzworkshop met hun instrumenten", 1200, 900, sizes="(max-width: 44rem) 100vw, 50vw")}</span>
+        <span class="duo">{img("studio-drumkit", "Drumstel in de oefenruimte van 2nd Floor Jazz School", 1200, 800, sizes="(max-width: 44rem) 100vw, 50vw")}</span>
         <div class="card-body">
           <h3>Jazzworkshops</h3>
           <p>Samenspel, ritmiek en improviseren over akkoordenschema’s in een vaste groep. Voor volwassen muzikanten met enige jazzervaring, alle instrumenten.</p>
@@ -248,7 +248,7 @@ home = f"""
       </a>
       <a class="card" href="/saxofoonles/">
         <span class="side">Kant B</span>
-        <span class="duo blue">{img("workshop-1", "Saxofoniste speelt altsaxofoon in de tuin", 900, 1200, sizes="(max-width: 44rem) 100vw, 50vw").replace('alt=', 'style="object-position:50% 20%" alt=')}</span>
+        <span class="duo blue">{img("studio-saxophone-lesson", "Saxofonist met tenorsaxofoon tijdens een les in de studio", 1200, 800, sizes="(max-width: 44rem) 100vw, 50vw").replace('alt=', 'style="object-position:60% 40%" alt=')}</span>
         <div class="card-body">
           <h3>Saxofoonles</h3>
           <p>Privéles voor volwassenen bij Eldert, van de allereerste toon tot jazzimprovisatie. Ook een goede opstap naar de workshop.</p>
@@ -274,6 +274,7 @@ home = f"""
       <p style="margin-top:1.5rem"><a href="/docent/">Meer over Eldert en zijn muziek →</a></p>
     </div>
     <div>
+      <figure class="portrait" style="max-width:none;margin-bottom:2.5rem">{img("studio-eldert-at-the-piano", "Eldert van Oosten aan de piano in de oefenruimte", 1200, 800, sizes="(max-width: 52rem) 100vw, 45vw")}</figure>
       <blockquote class="pull">Het plezier van samen muziek maken staat voorop.</blockquote>
       <p class="note" style="margin-top:2rem">Jazz staat centraal — maar ook blues, latin, soul en wereldmuziek komen aan bod.</p>
     </div>
@@ -284,13 +285,13 @@ home = f"""
   <div class="wrap">
     <div class="section-head">
       <span class="track" data-n="A4">In beeld</span>
-      <h2>Een avond bij de <em>workshop</em></h2>
+      <h2>In de <em>oefenruimte</em></h2>
     </div>
     <div class="gallery">
-      <figure>{img("workshop-3", "Contrabassist en pianist tijdens een workshopoptreden", 900, 1200)}</figure>
-      <figure>{img("workshop-4", "Gitarist speelt tijdens de jazzworkshop", 900, 1200)}</figure>
-      <figure>{img("workshop-5", "Pianist en contrabassiste spelen samen", 900, 1200)}</figure>
-      <figure>{img("workshop-6", "Saxofoons op tafel, publiek kijkt toe", 900, 1200)}</figure>
+      <figure>{img("studio-double-bass-closeup", "Close-up van de contrabas in de oefenruimte", 1200, 800)}</figure>
+      <figure>{img("studio-piano-fingers-closeup", "Handen op de toetsen van de piano", 1200, 800)}</figure>
+      <figure>{img("studio-piano-player", "Pianist speelt in de oefenruimte", 1200, 800).replace('alt=', 'style="object-position:75% 50%" alt=')}</figure>
+      <figure>{img("studio-drumkit", "Bekkens en trommels van het drumstel", 1200, 800).replace('alt=', 'style="object-position:30% 50%" alt=')}</figure>
     </div>
   </div>
 </section>
@@ -336,7 +337,7 @@ sax = f"""
       </ul>
     </div>
     <figure class="portrait" style="max-width:none">
-      {img("workshop-1", "Leerling speelt altsaxofoon", 900, 1200, sizes="(max-width: 52rem) 100vw, 45vw").replace('alt=', 'style="filter:none;aspect-ratio:4/5;object-fit:cover;object-position:50% 15%" alt=')}
+      {img("studio-saxophone-lesson", "Saxofonist met tenorsaxofoon tijdens een les in de studio", 1200, 800, sizes="(max-width: 52rem) 100vw, 45vw").replace('alt=', 'style="aspect-ratio:4/5;object-fit:cover;object-position:58% 40%" alt=')}
     </figure>
   </div>
 </section>
@@ -430,7 +431,7 @@ ws = f"""
       </ul>
     </div>
     <figure class="portrait" style="max-width:none">
-      {img("studio-collage", "De studio van 2nd Floor Jazz School met saxofoon, piano, contrabas en drums", 1000, 1333, sizes="(max-width: 52rem) 100vw, 45vw").replace('alt=', 'style="filter:none" alt=')}
+      {img("studio-double-bass-guitar-together", "Gitarist en contrabassist spelen samen in de oefenruimte", 1200, 799, sizes="(max-width: 52rem) 100vw, 45vw")}
       <figcaption>De studio: piano, contrabas, drumstel en versterkers staan klaar.</figcaption>
     </figure>
   </div>
@@ -445,12 +446,12 @@ ws = f"""
     </div>
     <div class="gallery">
       <figure class="wide">{img("workshop-9", "Deelnemers van de jazzworkshop na de einduitvoering", 1200, 900, sizes="(max-width: 44rem) 100vw, 50vw")}</figure>
-      <figure>{img("workshop-8", "Contrabassist Harm Wijntjes bij de einduitvoering", 900, 1200)}</figure>
-      <figure>{img("workshop-7", "Pianist, contrabassiste en publiek bij het optreden", 900, 1200)}</figure>
-      <figure>{img("workshop-3", "Contrabas en piano tijdens het optreden", 900, 1200)}</figure>
-      <figure>{img("workshop-4", "Gitarist van de workshopgroep", 900, 1200)}</figure>
-      <figure>{img("workshop-5", "Piano en contrabas op de buurtboerderij", 900, 1200)}</figure>
-      <figure>{img("workshop-2", "Twee saxofonisten spelen samen", 900, 1200)}</figure>
+      <figure>{img("studio-double-bass-closeup", "Close-up van de contrabas", 1200, 800)}</figure>
+      <figure>{img("studio-piano-fingers-closeup", "Handen op de pianotoetsen", 1200, 800)}</figure>
+      <figure>{img("studio-saxophone-lesson", "Saxofonist in de oefenruimte", 1200, 800).replace('alt=', 'style="object-position:60% 40%" alt=')}</figure>
+      <figure>{img("studio-drumkit", "Drumstel in de oefenruimte", 1200, 800).replace('alt=', 'style="object-position:30% 50%" alt=')}</figure>
+      <figure>{img("studio-piano-player", "Pianist in de oefenruimte", 1200, 800).replace('alt=', 'style="object-position:75% 50%" alt=')}</figure>
+      <figure>{img("studio-eldert-at-the-piano", "Eldert van Oosten aan de piano", 1200, 800).replace('alt=', 'style="object-position:55% 50%" alt=')}</figure>
     </div>
   </div>
 </section>
@@ -496,8 +497,8 @@ docent = f"""
 <section>
   <div class="wrap split">
     <figure class="portrait">
-      <img src="/assets/img/eldert-portret.webp" width="240" height="240" alt="Portret van Eldert van Oosten met tenorsaxofoon" style="width:100%">
-      <figcaption>Eldert van Oosten op tenorsaxofoon</figcaption>
+      {img("studio-eldert-at-the-piano", "Eldert van Oosten aan de piano in de oefenruimte", 1200, 800, eager=True, sizes="(max-width: 52rem) 100vw, 45vw")}
+      <figcaption>Eldert van Oosten in de oefenruimte</figcaption>
     </figure>
     <div>
       <p class="lead">Eldert van Oosten leidt de workshops van de 2nd Floor Jazz School en geeft er saxofoonles. Hij is geboren en opgegroeid in Amsterdam, begon op zijn twaalfde op de klarinet en kreeg op zijn vijftiende zijn eerste altsaxofoon.</p>
@@ -579,7 +580,7 @@ contact = f"""
       </ul>
     </div>
     <div>
-      <figure class="portrait" style="max-width:none">{img("2nd-floor-folder", "Folder van 2nd Floor Jazz School — jazzworkshops", 500, 1090).replace('alt=', 'style="filter:none;max-width:15rem" alt=')}</figure>
+      <figure class="portrait" style="max-width:none">{img("studio-piano-fingers-closeup", "Handen op de pianotoetsen in de oefenruimte", 1200, 800, sizes="(max-width: 52rem) 100vw, 45vw")}</figure>
     </div>
   </div>
 </section>
@@ -604,8 +605,8 @@ en = f"""
       <div>{contact_buttons("en")}</div>
     </div>
     <figure class="hero-figure">
-      {img("workshop-2", "Teacher Eldert van Oosten playing tenor saxophone with a participant", 900, 1200, eager=True, sizes="(max-width: 52rem) 100vw, 40vw")}
-      <figcaption><b>Live</b> — playing together at the end-of-season concert</figcaption>
+      {img("studio-double-bass-guitar-together", "Guitarist and double bass player playing together in the 2nd Floor Jazz School practice room", 1200, 799, eager=True, sizes="(max-width: 52rem) 100vw, 40vw").replace('alt=', 'style="object-position:30% 50%" alt=')}
+      <figcaption><b>Practice room</b> — guitar and double bass, playing together</figcaption>
     </figure>
   </div>
 </section>
@@ -633,7 +634,7 @@ en = f"""
 </section>
 <section id="teacher">
   <div class="wrap split">
-    <figure class="portrait"><img src="/assets/img/eldert-portret.webp" width="240" height="240" alt="Portrait of Eldert van Oosten with tenor saxophone" style="width:100%" loading="lazy"></figure>
+    <figure class="portrait">{img("studio-eldert-at-the-piano", "Eldert van Oosten at the piano in the practice room", 1200, 800, sizes="(max-width: 52rem) 100vw, 45vw")}</figure>
     <div>
       <span class="track" data-n="A4">Your teacher</span>
       <h2>Eldert van <em>Oosten</em></h2>
