@@ -46,3 +46,7 @@ body { background: #8d877b; display: grid; place-items: center; min-height: 100v
 
 /* keep the info text clear of the QR code on A4 */
 .a4 .info { max-width: 60cqw; }
+
+/* site address under the logo on square posts, so an image shared on its own still leads to the site */
+.site { position: absolute; z-index: 3; font: 700 1.75cqw/1 "Hanken Grotesk", sans-serif; letter-spacing: .16em; text-transform: uppercase; white-space: nowrap; }
+.a4 .site { display: none; }

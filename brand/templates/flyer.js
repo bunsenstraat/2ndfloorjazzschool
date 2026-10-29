@@ -40,3 +40,30 @@ function addQr() {
   fill('qr-label', lines(get('qrlabel', 'Scan voor|meer info')));
 }
 addQr();
+
+// Square posts: put the site address right under the logo (the logo moves up to make room).
+// A4 flyers already carry it in the contact line.
+document.fonts.ready.then(() => {
+  if (FORMAT !== 'square' || q.get('site') === 'none') return;
+  const cover = document.querySelector('.cover');
+  const logo = cover.querySelector('.logo');
+  if (!logo) return;
+  const place = () => {
+    const c = cover.getBoundingClientRect();
+    const unit = c.width / 100;
+    const site = document.createElement('div');
+    site.className = 'site';
+    site.textContent = get('site', '2ndfloorjazzschool.nl');
+    site.style.color = getComputedStyle(cover.querySelector('.info') || cover).color;
+    cover.appendChild(site);
+    const gap = 1.3 * unit;
+    const lift = site.getBoundingClientRect().height + gap;
+    logo.style.bottom = (c.bottom - logo.getBoundingClientRect().bottom + lift) + 'px';
+    const l = logo.getBoundingClientRect();
+    // align with the logo's edge on the side of the cover it sits on
+    if (l.left - c.left < c.right - l.right) site.style.left = (l.left - c.left) + 'px';
+    else site.style.right = (c.right - l.right) + 'px';
+    site.style.top = (l.bottom - c.top + gap) + 'px';
+  };
+  logo.complete ? place() : logo.addEventListener('load', place);
+});
